@@ -2,7 +2,7 @@
 import { Link } from '@inertiajs/vue3';
 import BurgerIcon from './BurgerIcon.vue';
 import CartIcon from './CartIcon.vue';
-import ApplicationLogo from './ApplicationLogo.vue';
+import ApplicationLogo from '../Icon/ApplicationLogo.vue';
 
 </script>
 
