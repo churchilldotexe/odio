@@ -14,7 +14,17 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                manrope: ['Manrope', ...defaultTheme.fontFamily.sans]
             },
+            fontSize: {
+                '2.5-xl': '1.75rem',
+            },
+            spacing: {
+                '30': '7.5rem'
+            },
+            colors: {
+                coral: '#d87d4A'
+            }
         },
     },
 
