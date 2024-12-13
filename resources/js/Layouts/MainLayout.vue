@@ -15,7 +15,7 @@ defineProps<{
     <Head :title="title" />
 
     <div class="relative font-manrope min-h-screen">
-        <header class="w-full fixed top-0 z-10">
+        <header class="w-full fixed top-0 z-10 md:px-6">
             <Nav />
         </header>
 

@@ -7,16 +7,45 @@ import ApplicationLogo from '../Icon/ApplicationLogo.vue';
 </script>
 
 <template>
-    <nav class="px-6 py-8 gap-11 border-b border-neutral-600 flex items-center justify-between md:justify-start ">
-        <Link href="/">
+    <nav :class='[
+        "px-6 py-8 gap-11 border-b border-neutral-600 flex items-center justify-between max-w-6xl mx-auto relative",
+        "md:justify-start md:px-0 lg:justify-between"
+    ]'>
+
+        <!-- TODO: should be checkbox -->
+        <Link href="/" class="lg:hidden">
         <BurgerIcon class="fill-current text-gray-500" />
         </Link>
 
-        <Link href="#" class="">
+        <Link href="/" class="">
         <ApplicationLogo class="fill-current text-gray-500" />
         </Link>
 
-        <Link href="#" class="md:ml-auto">
+        <ul
+            class="hidden absolute -translate-x-1/2 left-1/2 text-white uppercase font-bold text-sm lg:flex items-center justify-between gap-8">
+            <li class="">
+                <Link href="/" class="">
+                home
+                </Link>
+            </li>
+            <li>
+                <Link href="/" class="">
+                headphone
+                </Link>
+            </li>
+            <li>
+                <Link href="/" class="">
+                speakers
+                </Link>
+            </li>
+            <li>
+                <Link href="/" class="">
+                earphones
+                </Link>
+            </li>
+        </ul>
+
+        <Link href="#" class="md:ml-auto lg:ml-0">
         <CartIcon class="fill-current text-gray-500" />
         </Link>
     </nav>
