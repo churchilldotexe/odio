@@ -7,7 +7,7 @@ import ButtonLink from '@/Components/ButtonLink.vue';
 
 <template>
     <MainLayout title="Home">
-        <div class="text-center grid gap-30 md:gap-24 pb-30 ">
+        <div class="text-center grid gap-30 pb-30 md:gap-24 md:pb-24">
 
             <section class="relative w-full h-[600px] md:h-[729px] grid content-center gap-4 ">
 
