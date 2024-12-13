@@ -13,10 +13,10 @@ const curentYear = computed(() => (new Date().getFullYear()))
 <template>
 
     <footer class="space-y-30 md:space-y-24 ">
-        <section class="px-6 space-y-10 space-y-16 md:px-10">
+        <section class="px-6 grid gap-10 md:gap-16 md:px-10">
             <img class="rounded-lg w-full md:hidden" src="/assets/shared/mobile/image-best-gear.jpg"
                 alt="a guy with a headset">
-            <img class="hidden rounded-lg w-full md:block" src="/assets/shared/tablet/image-best-gear.jpg"
+            <img class="hidden rounded-lg size-full md:block" src="/assets/shared/tablet/image-best-gear.jpg"
                 alt="a guy with a headset">
             <div class="space-y-8 md:px-14">
                 <h3
