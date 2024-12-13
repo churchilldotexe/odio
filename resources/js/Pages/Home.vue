@@ -31,8 +31,8 @@ import ButtonLink from '@/Components/ButtonLink.vue';
                 <ButtonLink href="/" />
             </section>
 
-            <section :class='[" text-center gap-16 flex flex-col px-6",
-                "md:flex-row md:gap-[.6rem] md:justify-between"
+            <section :class='[" text-center gap-16 flex flex-col px-6 ",
+                "md:flex-row md:gap-[.6rem] md:justify-between md:px-10 "
             ]'>
                 <ProductCategoryGrid img-src="/assets/shared/desktop/image-category-thumbnail-headphones.png"
                     title="Headphones" href="#" />
@@ -44,7 +44,7 @@ import ButtonLink from '@/Components/ButtonLink.vue';
                     title="Earphones" href="#" />
             </section>
 
-            <section class="grid gap-6 px-6">
+            <section class="grid gap-6 px-6 md:gap-8 md:px-10">
                 <section
                     :class='["rounded-lg py-14 px-6 grid content-center relative overflow-hidden gap-6 bg-coral isolate", "md:gap-16 md:py-[3.3rem]"]'>
                     <div class="grid place-items-center ">
@@ -66,21 +66,26 @@ import ButtonLink from '@/Components/ButtonLink.vue';
                     </div>
                 </section>
 
-                <section class="grid items-center ">
-                    <img class="[grid-area:1/1] rounded-lg  w-full" src="/assets/home/mobile/image-speaker-zx7.jpg">
-                    <div class="[grid-area:1/1] justify-self-start pl-6  space-y-8 ">
-                        <!-- TODO:  fix the font size just before md (must transition with md font size smoothly)-->
+                <section class="grid items-center  ">
+                    <img class="md:hidden [grid-area:1/1] rounded-lg  w-full"
+                        src="/assets/home/mobile/image-speaker-zx7.jpg">
+                    <img class="hidden md:block [grid-area:1/1] rounded-lg  w-full"
+                        src="/assets/home/tablet/image-speaker-zx7.jpg">
+                    <div class="[grid-area:1/1] justify-self-start pl-6  space-y-8 md:pl-16">
                         <h3 class="uppercase text-2.5-xl font-bold">zx7 speaker</h3>
                         <ButtonLink href="#" class="ml-0 border border-black bg-transparent text-black" />
                     </div>
                 </section>
 
-                <section class="w-full flex flex-col gap-6 relative">
-                    <!-- TODO: consider doing the md design before md(2 column) -->
-                    <img class="rounded-lg " src="/assets/home/mobile/image-earphones-yx1.jpg" role="presentation">
+                <section class="w-full relative grid gap-6 md:grid-cols-2 md:gap-3">
+                    <img class="md:hidden rounded-lg size-full " src="/assets/home/mobile/image-earphones-yx1.jpg"
+                        role="presentation">
+                    <img class="hidden md:block rounded-lg size-full " src="/assets/home/tablet/image-earphones-yx1.jpg"
+                        role="presentation">
 
-                    <div class="py-10 px-6 bg-gray-100 flex flex-col gap-8 items-start justify-center">
-                        <h3 class="uppercase text-2.5-xl font-bold">yx1 earphone</h3>
+                    <div
+                        class="rounded-lg py-10 px-6 bg-gray-100 flex flex-col gap-8 items-start justify-center md:items-center">
+                        <h3 class="uppercase text-2.5-xl font-bold ">yx1 earphone</h3>
 
                         <ButtonLink href="#" class="ml-0 bg-transparent text-black border border-black" />
                     </div>
