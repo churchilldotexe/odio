@@ -11,9 +11,9 @@ defineProps<{
 </script>
 
 <template>
-    <section class="bg-gray-100 pb-6 pt-[5.5rem] relative rounded-lg ">
-        <img class="w-1/2 mx-auto absolute top-0 -translate-y-1/3 -translate-x-1/2 left-1/2" :src="imgSrc"
-            :alt="`${title} Product Category`" />
+    <section class="bg-gray-100 w-full pb-6 pt-[5.5rem] relative rounded-lg ">
+        <img class="w-1/2 md:w-2/3 max-w-44 mx-auto absolute top-0 -translate-y-1/3 -translate-x-1/2 left-1/2"
+            :src="imgSrc" :alt="`${title} Product Category`" />
 
         <div class="space-y-4">
             <h3 class="uppercase font-bold">{{ title }}</h3>
