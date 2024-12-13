@@ -7,7 +7,7 @@ import ApplicationLogo from '../Icon/ApplicationLogo.vue';
 </script>
 
 <template>
-    <nav class="px-6 py-8 border-b border-neutral-600 flex items-center justify-between ">
+    <nav class="px-6 py-8 gap-11 border-b border-neutral-600 flex items-center justify-between md:justify-start ">
         <Link href="/">
         <BurgerIcon class="fill-current text-gray-500" />
         </Link>
@@ -16,7 +16,7 @@ import ApplicationLogo from '../Icon/ApplicationLogo.vue';
         <ApplicationLogo class="fill-current text-gray-500" />
         </Link>
 
-        <Link href="#">
+        <Link href="#" class="md:ml-auto">
         <CartIcon class="fill-current text-gray-500" />
         </Link>
     </nav>
