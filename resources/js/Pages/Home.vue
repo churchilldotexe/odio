@@ -9,26 +9,35 @@ import ButtonLink from '@/Components/ButtonLink.vue';
     <MainLayout title="Home">
         <div class="text-center grid gap-30 pb-30 md:gap-24 md:pb-24">
 
-            <section class="relative w-full h-[600px] md:h-[729px] grid content-center gap-4 ">
+            <section class="relative w-full h-[600px] grid place-items-center gap-4 md:h-[729px]">
 
-                <img class="-z-10 absolute size-full object-center object-cover "
+                <img class="-z-10 absolute size-full object-center object-cover lg:hidden "
                     src="/assets/home/tablet/image-header.jpg" alt="Black HeadPhone" />
-                <img class="hidden -z-10 absolute size-full object-right object-cover "
+                <img class="hidden -z-10 absolute size-full object-center object-cover lg:block "
                     src="/assets/home/desktop/image-hero.jpg" alt="Black HeadPhone" />
 
-                <div class="flex flex-col justify-center max-w-sm md:max-w-md mx-auto items-center gap-4 ">
-                    <h1 class="text-white/50 text-sm tracking-[0.625em] ">NEW PRODUCT</h1>
-                    <h2 class="text-4xl md:leading-none md:text-[3.5rem] text-white">XX99 MARK II HEADPHONES</h2>
-                    <p class="text-white/75 py-2 px-6 font-medium">Experience natural, lifelike audio and exceptional
+                <div
+                    :class='["w-full flex flex-col justify-center max-w-sm mx-auto items-center gap-4 ", "md:max-w-md md:gap-6 lg:max-w-6xl lg:items-start "]'>
+
+                    <h1 class="text-white/50 text-sm tracking-[0.625em]">NEW PRODUCT</h1>
+                    <h2 :class='["text-4xl text-white ", "md:text-[3.5rem] md:leading-none lg:w-1/2 lg:text-left"]'>
+                        XX99 MARK II
+                        HEADPHONES</h2>
+                    <p :class='["text-white/75 py-2 px-6 font-medium ", "md:pb-4 lg:px-0 lg:text-left lg:w-1/3 "]'>
+                        Experience
+                        natural,
+                        lifelike audio
+                        and
+                        exceptional
                         build
                         quality made
                         for
                         the
                         passionate music enthusiast
                     </p>
+                    <ButtonLink href="/foo" class=" hocus-visible:bg-coral-light lg:ml-0 " />
                 </div>
 
-                <ButtonLink href="/" />
             </section>
 
             <section :class='[" text-center gap-16 flex flex-col px-6 ",
@@ -55,7 +64,7 @@ import ButtonLink from '@/Components/ButtonLink.vue';
                     </div>
                     <div class="flex flex-col relative items-center justify-center gap-6 max-w-[349px] mx-auto  ">
                         <h3
-                            :class='["mt-2 uppercase font-bold text-white text-4xl max-w-[10ch]", "md:leading-none md:text-[3.5rem] "]'>
+                            :class='["mt-2 uppercase font-bold text-white text-4xl max-w-[10ch] ", "md:leading-none md:text-[3.5rem] "]'>
                             zx9 speaker
                         </h3>
                         <p class="text-white/75 font-medium">Upgrade to premium speakers that are phenomenally built to
