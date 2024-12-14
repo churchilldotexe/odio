@@ -7,7 +7,7 @@ import ButtonLink from '@/Components/ButtonLink.vue';
 
 <template>
     <MainLayout title="Home">
-        <div class="text-center grid gap-30 pb-30 md:gap-24 md:pb-24">
+        <div class="text-center grid justify-items-center gap-30 pb-30 md:gap-24 md:pb-24">
 
             <section class="relative w-full h-[600px] grid place-items-center gap-4 md:h-[729px] ">
 
@@ -41,7 +41,7 @@ import ButtonLink from '@/Components/ButtonLink.vue';
 
             </section>
 
-            <section :class='[" text-center gap-16 flex flex-col px-6 max-w-screen-xl items-center mx-auto w-full ",
+            <section :class='[" text-center gap-16 flex flex-col px-6 max-w-screen-xl items-center w-full ",
                 "md:flex-row md:gap-[.6rem] md:justify-between md:px-10 lg:px-0 lg:gap-8 "
             ]'>
                 <ProductCategoryGrid img-src="/assets/shared/desktop/image-category-thumbnail-headphones.png"
@@ -54,21 +54,29 @@ import ButtonLink from '@/Components/ButtonLink.vue';
                     title="Earphones" href="#" />
             </section>
 
-            <section class="grid gap-6 px-6 md:gap-8 md:px-10">
+            <section class=" grid gap-6 px-6 max-w-screen-xl md:gap-8 md:px-10 lg:px-0 ">
                 <section
-                    :class='["rounded-lg py-14 px-6 grid content-center relative overflow-hidden gap-6 bg-coral isolate", "md:gap-16 md:py-[3.3rem]"]'>
+                    :class='[
+                        " rounded-lg py-14 px-6 grid content-center relative overflow-hidden gap-6 bg-coral isolate", "md:gap-16 md:py-[3.3rem] lg:grid-cols-2 "]'>
                     <div class="grid place-items-center ">
-                        <img :class='["absolute scale-[1.70] [grid-area:1/1] -z-10  ", "md:max-w-lg md:scale-[1.9]"]'
+
+                        <img :class='["absolute scale-[1.70] [grid-area:1/1] -z-10  ",
+                            "md:max-w-lg md:scale-[1.9] lg:scale-150 lg:top-0"]'
                             src="/assets/home/desktop/pattern-circles.svg" role="decoration" />
-                        <img class=" w-[60%] [grid-area:1/1] md:max-w-48  max-w-56 "
+
+                        <img :class='[" w-[60%] [grid-area:1/1] max-w-56 ",
+                            "md:max-w-48 lg:absolute lg:-bottom-2 lg:max-w-72 "]'
                             src="/assets/home/mobile/image-speaker-zx9.png" alt="black and white speaker">
                     </div>
-                    <div class="flex flex-col relative items-center justify-center gap-6 max-w-[349px] mx-auto  ">
-                        <h3
-                            :class='["mt-2 uppercase font-bold text-white text-4xl max-w-[10ch] ", "md:leading-none md:text-[3.5rem] "]'>
+
+                    <div
+                        class="flex flex-col relative items-center justify-center gap-6 max-w-[349px] mx-auto lg:items-start lg:text-left">
+                        <h3 :class='["mt-2 uppercase font-bold text-white text-4xl max-w-[10ch] ",
+                            "md:leading-none md:text-[3.5rem] "]'>
                             zx9 speaker
                         </h3>
-                        <p class="text-white/75 font-medium">Upgrade to premium speakers that are phenomenally built to
+                        <p class="text-white/75 font-medium md:pb-4">Upgrade to premium speakers that are phenomenally
+                            built to
                             deliver truly
                             remarkable sound.</p>
 
