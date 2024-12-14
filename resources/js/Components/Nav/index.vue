@@ -23,22 +23,22 @@ import ApplicationLogo from '../Icon/ApplicationLogo.vue';
 
         <ul
             class="hidden absolute -translate-x-1/2 left-1/2 text-white uppercase font-bold text-sm lg:flex items-center justify-between gap-8 ">
-            <li class="hocus-visible:text-coral">
+            <li class="transition-colors duration-300 hocus-visible:text-coral">
                 <Link href="/" class="">
                 home
                 </Link>
             </li>
-            <li class="hocus-visible:text-coral">
+            <li class="transition-colors duration-300 hocus-visible:text-coral">
                 <Link href="/" class="">
                 headphone
                 </Link>
             </li>
-            <li class="hocus-visible:text-coral">
+            <li class="transition-colors duration-300 hocus-visible:text-coral">
                 <Link href="/" class="">
                 speakers
                 </Link>
             </li>
-            <li class="hocus-visible:text-coral">
+            <li class=" transition-colors duration-300 hocus-visible:text-coral">
                 <Link href="/" class="">
                 earphones
                 </Link>
