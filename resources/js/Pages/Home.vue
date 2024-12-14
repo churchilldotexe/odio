@@ -18,7 +18,7 @@ import ButtonLink from '@/Components/ButtonLink.vue';
                     src="/assets/home/desktop/image-hero.jpg" alt="Black HeadPhone" />
 
                 <div
-                    :class='["w-full flex flex-col justify-center max-w-sm mx-auto items-center gap-4 ", "md:max-w-md md:gap-6 lg:max-w-6xl lg:items-start "]'>
+                    :class='["w-full flex flex-col justify-center max-w-sm mx-auto items-center gap-4 ", "md:max-w-md md:gap-6 lg:max-w-screen-xl lg:items-start lg:px-6 xl:px-0 "]'>
 
                     <h1 class="text-white/50 text-sm tracking-[0.625em]">NEW PRODUCT</h1>
                     <h2 :class='["text-4xl text-white ", "md:text-[3.5rem] md:leading-none lg:w-1/2 lg:text-left"]'>
@@ -41,8 +41,8 @@ import ButtonLink from '@/Components/ButtonLink.vue';
 
             </section>
 
-            <section :class='[" text-center gap-16 flex flex-col px-6 max-w-screen-lg items-center mx-auto w-full ",
-                "md:flex-row md:gap-[.6rem] md:justify-between md:px-10 "
+            <section :class='[" text-center gap-16 flex flex-col px-6 max-w-screen-xl items-center mx-auto w-full ",
+                "md:flex-row md:gap-[.6rem] md:justify-between md:px-10 lg:px-0 lg:gap-8 "
             ]'>
                 <ProductCategoryGrid img-src="/assets/shared/desktop/image-category-thumbnail-headphones.png"
                     title="Headphones" href="#" />

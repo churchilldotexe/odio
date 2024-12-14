@@ -17,7 +17,8 @@ defineProps<{
 
         <div class="space-y-4">
             <h3 class="uppercase font-bold">{{ title }}</h3>
-            <Link :href="href" class="uppercase text-sm flex text-black/50 gap-2 items-center justify-center font-bold">
+            <Link :href="href"
+                class=" w-fit mx-auto uppercase text-sm flex text-black/50 gap-2 items-center justify-center font-bold hocus-visible:text-coral">
             shop
             <span>
                 <ArrowIcon />

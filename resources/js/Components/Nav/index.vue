@@ -8,7 +8,7 @@ import ApplicationLogo from '../Icon/ApplicationLogo.vue';
 
 <template>
     <nav :class='[
-        "px-6 py-8 gap-11 border-b border-neutral-600 flex items-center justify-between max-w-6xl mx-auto relative",
+        "px-6 py-8 gap-11 border-b border-neutral-600 flex items-center justify-between max-w-screen-xl mx-auto relative",
         "md:justify-start md:px-0 lg:justify-between"
     ]'>
 
