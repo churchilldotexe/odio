@@ -7,7 +7,7 @@ import ButtonLink from '@/Components/ButtonLink.vue';
 
 <template>
     <MainLayout title="Home">
-        <div class="text-center grid justify-items-center gap-30 pb-30 md:gap-24 md:pb-24">
+        <div class="text-center grid justify-items-center gap-30 pb-30 md:gap-24 md:pb-24 lg:gap-30 lg:pb-30 ">
 
             <section class="relative w-full h-[600px] grid place-items-center gap-4 md:h-[729px] ">
 
@@ -36,13 +36,14 @@ import ButtonLink from '@/Components/ButtonLink.vue';
                         the
                         passionate music enthusiast
                     </p>
-                    <ButtonLink href="/foo" class=" hocus-visible:bg-coral-light lg:ml-0 " />
+                    <ButtonLink href="/foo"
+                        class=" hocus-visible:bg-coral-light lg:ml-0 transition-colors duration-300" />
                 </div>
 
             </section>
 
             <section :class='[" text-center gap-16 flex flex-col px-6 max-w-screen-xl items-center w-full ",
-                "md:flex-row md:gap-[.6rem] md:justify-between md:px-10 lg:px-0 lg:gap-8 "
+                "md:flex-row md:gap-[.6rem] md:justify-between md:px-10 xl:px-0 lg:gap-8 "
             ]'>
                 <ProductCategoryGrid img-src="/assets/shared/desktop/image-category-thumbnail-headphones.png"
                     title="Headphones" href="#" />
@@ -54,7 +55,7 @@ import ButtonLink from '@/Components/ButtonLink.vue';
                     title="Earphones" href="#" />
             </section>
 
-            <section class=" grid gap-6 px-6 max-w-screen-xl md:gap-8 md:px-10 lg:px-0 ">
+            <section :class='[" grid gap-6 px-6 max-w-screen-xl ", "md:gap-8 md:px-10 xl:px-0 lg:gap-12 lg:pt-12 "]'>
                 <section
                     :class='[
                         " rounded-lg py-14 px-6 grid content-center relative overflow-hidden gap-6 bg-coral isolate", "md:gap-16 md:py-[3.3rem] lg:grid-cols-2 "]'>
@@ -80,35 +81,76 @@ import ButtonLink from '@/Components/ButtonLink.vue';
                             deliver truly
                             remarkable sound.</p>
 
-                        <ButtonLink class="bg-black md:my-4" asLink href="#" />
+                        <ButtonLink
+                            class="bg-black md:my-4 hocus-visible:text-white hocus-visible:bg-[#4c4c4c] transition-colors duration-300"
+                            asLink href="#" />
                     </div>
                 </section>
 
                 <section class="grid items-center  ">
-                    <img class="md:hidden [grid-area:1/1] rounded-lg  w-full"
+                    <img class=" [grid-area:1/1] rounded-lg w-full md:hidden "
                         src="/assets/home/mobile/image-speaker-zx7.jpg">
-                    <img class="hidden md:block [grid-area:1/1] rounded-lg  w-full"
+                    <img class="hidden md:block [grid-area:1/1] rounded-lg w-full lg:hidden"
                         src="/assets/home/tablet/image-speaker-zx7.jpg">
-                    <div class="[grid-area:1/1] justify-self-start pl-6  space-y-8 md:pl-16">
+                    <img class="hidden md:block [grid-area:1/1] rounded-lg w-full"
+                        src="/assets/home/desktop/image-speaker-zx7.jpg">
+                    <div class="[grid-area:1/1] justify-self-start pl-6 space-y-8 md:pl-16">
                         <h3 class="uppercase text-2.5-xl font-bold">zx7 speaker</h3>
-                        <ButtonLink href="#" class="ml-0 border border-black bg-transparent text-black" />
+                        <ButtonLink href="#"
+                            class="ml-0 border border-black bg-transparent text-black hocus-visible:text-white hocus-visible:bg-black transition-colors duration-300" />
                     </div>
                 </section>
 
-                <section class="w-full relative grid gap-6 md:grid-cols-2 md:gap-3">
-                    <img class="md:hidden rounded-lg size-full " src="/assets/home/mobile/image-earphones-yx1.jpg"
-                        role="presentation">
-                    <img class="hidden md:block rounded-lg size-full " src="/assets/home/tablet/image-earphones-yx1.jpg"
-                        role="presentation">
+                <section :class='["w-full relative grid gap-6 ", "md:grid-cols-2 md:gap-3 lg:gap-8"]'>
+                    <img class=" rounded-lg size-full md:hidden lg:block "
+                        src="/assets/home/mobile/image-earphones-yx1.jpg" role="presentation">
+                    <img class="hidden md:block rounded-lg size-full lg:hidden"
+                        src="/assets/home/tablet/image-earphones-yx1.jpg" role="presentation">
 
                     <div
-                        class="rounded-lg py-10 px-6 bg-gray-100 flex flex-col gap-8 items-start justify-center md:items-center">
+                        class="rounded-lg py-10 px-6 bg-gray-100 flex flex-col gap-8 items-start justify-center md:items-center lg:items-start lg:px-24 ">
+
                         <h3 class="uppercase text-2.5-xl font-bold ">yx1 earphone</h3>
 
-                        <ButtonLink href="#" class="ml-0 bg-transparent text-black border border-black" />
+                        <ButtonLink href="#"
+                            class="ml-0 bg-transparent text-black border border-black hocus-visible:text-white hocus-visible:bg-black transition-colors duration-300" />
+
                     </div>
                 </section>
             </section>
+
+            <article
+                :class='["px-6 grid gap-10 max-w-screen-xl ", "md:gap-16 md:px-10 lg:grid-cols-2 xl:px-0 lg:gap-30 lg:py-20 "]'>
+                <img class="rounded-lg w-full md:hidden" src="/assets/shared/mobile/image-best-gear.jpg"
+                    alt="a guy with a headset">
+                <img class="hidden rounded-lg size-full md:block lg:hidden"
+                    src="/assets/shared/tablet/image-best-gear.jpg" alt="a guy with a headset">
+
+                <img class="hidden rounded-lg size-full lg:block lg:order-2 "
+                    src="/assets/shared/desktop/image-best-gear.jpg" alt="a guy with a headset">
+
+                <div class="space-y-8 md:px-14 lg:place-self-center ">
+                    <h3
+                        class="uppercase font-bold text-2.5-xl text-center text-balance mx-auto md:text-4xl md:text-pretty lg:order-1 lg:text-left lg:max-w-none lg:text-balance ">
+                        Bringing
+                        you
+                        the <strong class=" text-coral">best</strong> audio
+                        gear</h3>
+
+                    <p class="font-medium text-black/50 md:text-center lg:text-left ">Located at the heart of New York
+                        City,
+                        Audiophile is
+                        the
+                        premier store for
+                        high end headphones,
+                        earphones, speakers, and audio accessories. We have a large showroom and luxury
+                        demonstration
+                        rooms available for you to browse and experience a wide range of our products. Stop by our
+                        store
+                        to meet some of the fantastic people who make Audiophile the best place to buy your portable
+                        audio equipment.</p>
+                </div>
+            </article>
         </div>
     </MainLayout>
 </template>
