@@ -9,11 +9,12 @@ import ButtonLink from '@/Components/ButtonLink.vue';
     <MainLayout title="Home">
         <div class="text-center grid gap-30 pb-30 md:gap-24 md:pb-24">
 
-            <section class="relative w-full h-[600px] grid place-items-center gap-4 md:h-[729px]">
+            <section class="relative w-full h-[600px] grid place-items-center gap-4 md:h-[729px] ">
 
+                <div class="hidden -z-10 absolute size-full bg-[#191919] lg:block " role="decoration" />
                 <img class="-z-10 absolute size-full object-center object-cover lg:hidden "
                     src="/assets/home/tablet/image-header.jpg" alt="Black HeadPhone" />
-                <img class="hidden -z-10 absolute size-full object-center object-cover lg:block "
+                <img class="hidden -z-10 absolute size-full object-center object-cover max-w-screen-2xl lg:block "
                     src="/assets/home/desktop/image-hero.jpg" alt="Black HeadPhone" />
 
                 <div
@@ -40,7 +41,7 @@ import ButtonLink from '@/Components/ButtonLink.vue';
 
             </section>
 
-            <section :class='[" text-center gap-16 flex flex-col px-6 ",
+            <section :class='[" text-center gap-16 flex flex-col px-6 max-w-screen-lg items-center mx-auto w-full ",
                 "md:flex-row md:gap-[.6rem] md:justify-between md:px-10 "
             ]'>
                 <ProductCategoryGrid img-src="/assets/shared/desktop/image-category-thumbnail-headphones.png"
