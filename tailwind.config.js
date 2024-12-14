@@ -1,5 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
+import plugin from 'tailwindcss/plugin';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -23,10 +24,15 @@ export default {
                 '30': '7.5rem'
             },
             colors: {
-                coral: '#d87d4A'
+                coral: '#d87d4A',
+                'coral-light': '#FBAF85'
             }
         },
     },
 
-    plugins: [forms],
+    plugins: [forms,
+        plugin(function ({ addVariant }) {
+            addVariant('hocus-visible', ['&:hover', '&:focus-visible'])
+        })
+    ],
 };
