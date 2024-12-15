@@ -3,6 +3,7 @@ import MainLayout from '@/Layouts/MainLayout.vue';
 import ProductCategoryGrid from '@/Components/Products/ProductCategoryGrid.vue';
 import ButtonLink from '@/Components/ButtonLink.vue';
 import ProductArticle from '@/Components/Products/ProductArticle.vue';
+import ProductNav from '@/Components/Products/ProductNav.vue';
 
 </script>
 
@@ -23,10 +24,10 @@ import ProductArticle from '@/Components/Products/ProductArticle.vue';
                 <div
                     :class='["w-full flex flex-col justify-center max-w-sm mx-auto items-center gap-4 ", "md:max-w-md md:gap-6 lg:max-w-screen-xl lg:items-start lg:px-6 xl:px-0 "]'>
 
-                    <h1 class="text-white/50 text-sm tracking-[0.625em]">NEW PRODUCT</h1>
-                    <h2 :class='["text-4xl text-white ", "md:text-[3.5rem] md:leading-none lg:w-1/2 lg:text-left"]'>
+                    <p class="text-white/50 text-sm tracking-[0.625em]">NEW PRODUCT</p>
+                    <h1 :class='["text-4xl text-white ", "md:text-[3.5rem] md:leading-none lg:w-1/2 lg:text-left"]'>
                         XX99 MARK II
-                        HEADPHONES</h2>
+                        HEADPHONES</h1>
                     <p :class='["text-white/75 py-2 px-6 font-medium ", "md:pb-4 lg:px-0 lg:text-left lg:w-1/3 "]'>
                         Experience
                         natural,
@@ -45,18 +46,7 @@ import ProductArticle from '@/Components/Products/ProductArticle.vue';
 
             </section>
 
-            <section :class='[" text-center gap-16 flex flex-col px-6 max-w-screen-xl items-center w-full ",
-                "md:flex-row md:gap-[.6rem] md:justify-between md:px-10 xl:px-0 lg:gap-8 "
-            ]'>
-                <ProductCategoryGrid img-src="/assets/shared/desktop/image-category-thumbnail-headphones.png"
-                    title="Headphones" href="#" />
-
-                <ProductCategoryGrid img-src="/assets/shared/desktop/image-category-thumbnail-speakers.png"
-                    title="Speakers" href="#" />
-
-                <ProductCategoryGrid img-src="/assets/shared/desktop/image-category-thumbnail-earphones.png"
-                    title="Earphones" href="#" />
-            </section>
+            <ProductNav />
 
             <section :class='[" grid gap-6 px-6 max-w-screen-xl ", "md:gap-8 md:px-10 xl:px-0 lg:gap-12 lg:pt-12 "]'>
                 <section

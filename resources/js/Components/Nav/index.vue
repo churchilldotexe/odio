@@ -12,7 +12,12 @@ const { y } = useScroll()
 const scrolledDown = ref<boolean>(false);
 
 const navBg = computed(() => {
-    return currentPath !== '/' ? 'bg-black' : 'bg-[#191919]'
+    if (currentPath !== '/') {
+        return "bg-black"
+    }
+
+    return y.value === 0 ? "bg:transparent" : "bg-[#191919]"
+
 })
 
 watch(y, (newY, oldY) => {
@@ -31,11 +36,11 @@ watch(y, (newY, oldY) => {
     <nav :class='[
         "px-6 py-8 gap-11 border-b border-neutral-600 flex items-center justify-between max-w-screen-xl mx-auto relative transition-transform origin-top ",
         scrolledDown ? " scale-y-0" : "scale-y-100",
-        "bg-transparent",
-        y === 0 ? "bg:transparent" : navBg,
+        navBg,
 
         "md:justify-start md:px-0 lg:justify-between",
-        `before:lg:content-[" "] before:lg:-z-10 before:lg:scale-x-[2] before:lg:size-full before:lg:absolute `,
+
+        `before:content-[""] before:hidden before:lg:block before:lg:-z-10 before:lg:scale-x-[2] before:lg:scale-y-105 before:lg:size-full before:lg:absolute`,
         currentPath !== `/` ? "before:bg-black" : "before:bg-[#191919]"
     ]'>
         <!-- TODO: should be checkbox -->
@@ -55,17 +60,17 @@ watch(y, (newY, oldY) => {
                 </Link>
             </li>
             <li class="transition-colors duration-300 hocus-visible:text-coral">
-                <Link href="/" class="">
+                <Link href="/headphone" class="">
                 headphone
                 </Link>
             </li>
             <li class="transition-colors duration-300 hocus-visible:text-coral">
-                <Link href="/" class="">
+                <Link href="/speaker" class="">
                 speakers
                 </Link>
             </li>
             <li class=" transition-colors duration-300 hocus-visible:text-coral">
-                <Link href="/" class="">
+                <Link href="/earphone" class="">
                 earphones
                 </Link>
             </li>
