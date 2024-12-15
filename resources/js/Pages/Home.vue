@@ -10,9 +10,11 @@ import ProductArticle from '@/Components/Products/ProductArticle.vue';
     <MainLayout title="Home">
         <div class="text-center grid justify-items-center gap-30 pb-30 md:gap-24 md:pb-24 lg:gap-30 lg:pb-30 ">
 
-            <section class="relative w-full h-[600px] grid place-items-center gap-4 md:h-[729px] ">
+            <section
+                :class='[
+                    "relative w-full h-[600px] grid place-items-center gap-4 md:h-[729px] ",
+                    "before:content-[` `] before:hidden before:-z-10 before:absolute before:size-full before:bg-[#191919] before:lg:block "]'>
 
-                <div class="hidden -z-10 absolute size-full bg-[#191919] lg:block " role="decoration" />
                 <img class="-z-10 absolute size-full object-center object-cover lg:hidden "
                     src="/assets/home/tablet/image-header.jpg" alt="Black HeadPhone" />
                 <img class="hidden -z-10 absolute size-full object-center object-cover max-w-screen-2xl lg:block "
