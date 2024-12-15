@@ -14,6 +14,18 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/headphone', function () {
+    return Inertia::render('HeadPhone');
+});
+
+Route::get('/speaker', function () {
+    return Inertia::render('Speaker');
+});
+
+Route::get('/earphone', function () {
+    return Inertia::render('EarPhone');
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
