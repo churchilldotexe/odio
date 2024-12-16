@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import MainLayout from '@/Layouts/MainLayout.vue';
-import ProductCategoryGrid from '@/Components/Products/ProductCategoryGrid.vue';
 import ButtonLink from '@/Components/ButtonLink.vue';
 import ProductArticle from '@/Components/Products/ProductArticle.vue';
 import ProductNav from '@/Components/Products/ProductNav.vue';
@@ -29,19 +28,10 @@ import ProductNav from '@/Components/Products/ProductNav.vue';
                         XX99 MARK II
                         HEADPHONES</h1>
                     <p :class='["text-white/75 py-2 px-6 font-medium ", "md:pb-4 lg:px-0 lg:text-left lg:w-1/3 "]'>
-                        Experience
-                        natural,
-                        lifelike audio
-                        and
-                        exceptional
-                        build
-                        quality made
-                        for
-                        the
-                        passionate music enthusiast
+                        Experience natural, lifelike audio and exceptional build quality made for the passionate music
+                        enthusiast
                     </p>
-                    <ButtonLink href="/foo"
-                        class=" hocus-visible:bg-coral-light lg:ml-0 transition-colors duration-300" />
+                    <ButtonLink href="/headphone" />
                 </div>
 
             </section>

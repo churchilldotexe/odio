@@ -22,11 +22,10 @@ const navBg = computed(() => {
 
 watch(y, (newY, oldY) => {
 
-    if (oldY > newY) {
-        scrolledDown.value = false;
-    } else {
-        scrolledDown.value = true;
+    if (newY !== oldY) {
+        scrolledDown.value = oldY < newY;
     }
+
 });
 
 
@@ -34,17 +33,20 @@ watch(y, (newY, oldY) => {
 
 <template>
     <nav :class='[
-        "px-6 py-8 gap-11 border-b border-neutral-600 flex items-center justify-between max-w-screen-xl mx-auto relative transition-transform origin-top ",
+        "px-6 py-8 gap-11 flex items-center justify-between max-w-screen-xl mx-auto relative transition-transform origin-top ",
         scrolledDown ? " scale-y-0" : "scale-y-100",
         navBg,
 
         "md:justify-start md:px-0 lg:justify-between",
 
-        `before:content-[""] before:hidden before:lg:block before:lg:-z-10 before:lg:scale-x-[2] before:lg:scale-y-105 before:lg:size-full before:lg:absolute`,
-        currentPath !== `/` ? "before:bg-black" : "before:bg-[#191919]"
+        `before:content-[""] before:hidden before:md:block before:-z-10 before:md:scale-x-[2] before:md:size-full before:md:absolute `,
+        currentPath !== `/` ? "before:bg-black" : "before:bg-[#191919]",
+
+        `after:content-[""] after:absolute after:-z-10 after:inset-0 after:border-b after:border-neutral-600 `
+
     ]'>
         <!-- TODO: should be checkbox -->
-        <Link href="/" class="lg:hidden">
+        <Link href="/" class="lg:hidden" aria-label="open menu">
         <BurgerIcon class="fill-current text-gray-500" />
         </Link>
 
@@ -76,7 +78,7 @@ watch(y, (newY, oldY) => {
             </li>
         </ul>
 
-        <Link href="#" class="md:ml-auto lg:ml-0">
+        <Link href="#" class="md:ml-auto lg:ml-0" aria-label="open cart">
         <CartIcon class="fill-current text-gray-500" />
         </Link>
     </nav>
