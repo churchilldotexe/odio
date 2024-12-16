@@ -1,50 +1,37 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
-import BurgerIcon from './BurgerIcon.vue';
-import CartIcon from './CartIcon.vue';
-import ApplicationLogo from '../Icon/ApplicationLogo.vue';
-import { usePage } from '@inertiajs/vue3'
-import { useScroll } from '@/Composables/useScroll';
-import { computed, ref, watch } from 'vue';
+import { useScroll } from '@/Composables/useScroll'
+import { Link, usePage } from '@inertiajs/vue3'
+import { computed, ref, watch } from 'vue'
+import ApplicationLogo from '../Icon/ApplicationLogo.vue'
+import BurgerIcon from './BurgerIcon.vue'
+import CartIcon from './CartIcon.vue'
 
 const currentPath = usePage().url
 const { y } = useScroll()
-const scrolledDown = ref<boolean>(false);
+const scrolledDown = ref<boolean>(false)
 
 const navBg = computed(() => {
     if (currentPath !== '/') {
-        return "bg-black"
+        return 'bg-black'
     }
 
-    return y.value === 0 ? "bg:transparent" : "bg-[#191919]"
-
+    return y.value === 0 ? 'bg:transparent' : 'bg-[#191919]'
 })
 
 watch(y, (newY, oldY) => {
-
     if (newY !== oldY) {
-        scrolledDown.value = oldY < newY;
+        scrolledDown.value = oldY < newY
     }
-
-});
-
-
+})
 </script>
 
 <template>
-    <nav :class='[
-        "px-6 py-8 gap-11 flex items-center justify-between max-w-screen-xl mx-auto relative transition-transform origin-top ",
-        scrolledDown ? " scale-y-0" : "scale-y-100",
-        navBg,
-
-        "md:justify-start md:px-0 lg:justify-between",
-
-        `before:content-[""] before:hidden before:md:block before:-z-10 before:md:scale-x-[2] before:md:size-full before:md:absolute `,
-        currentPath !== `/` ? "before:bg-black" : "before:bg-[#191919]",
-
-        `after:content-[""] after:absolute after:-z-10 after:inset-0 after:border-b after:border-neutral-600 `
-
-    ]'>
+    <nav class="relative mx-auto flex max-w-screen-xl origin-top items-center justify-between gap-11 px-6 py-8 transition-transform md:justify-start md:px-0 lg:justify-between before:content-[ after:content-[''] after:absolute after:inset-0 after:-z-10 after:border-b after:border-neutral-600 before:-z-10 before:hidden before:md:absolute before:md:block before:md:size-full before:md:scale-x-[2]"
+        :class="[
+            scrolledDown ? 'scale-y-0' : 'scale-y-100',
+            navBg,
+            currentPath !== `/` ? 'before:bg-black' : 'before:bg-[#191919]',
+        ]">
         <!-- TODO: should be checkbox -->
         <Link href="/" class="lg:hidden" aria-label="open menu">
         <BurgerIcon class="fill-current text-gray-500" />
@@ -55,7 +42,7 @@ watch(y, (newY, oldY) => {
         </Link>
 
         <ul
-            class="hidden absolute -translate-x-1/2 left-1/2 text-white uppercase font-bold text-sm lg:flex items-center justify-between gap-8 ">
+            class="absolute left-1/2 hidden -translate-x-1/2 items-center justify-between gap-8 text-sm font-bold uppercase text-white lg:flex">
             <li class="transition-colors duration-300 hocus-visible:text-coral">
                 <Link href="/" class="">
                 home
@@ -71,7 +58,7 @@ watch(y, (newY, oldY) => {
                 speakers
                 </Link>
             </li>
-            <li class=" transition-colors duration-300 hocus-visible:text-coral">
+            <li class="transition-colors duration-300 hocus-visible:text-coral">
                 <Link href="/earphone" class="">
                 earphones
                 </Link>
@@ -82,5 +69,4 @@ watch(y, (newY, oldY) => {
         <CartIcon class="fill-current text-gray-500" />
         </Link>
     </nav>
-
 </template>

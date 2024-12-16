@@ -1,23 +1,25 @@
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from 'vue'
 
 export function useScroll() {
-    const x = ref(window.scrollX)
-    const y = ref(window.scrollY)
+  const x = ref(window.scrollX)
+  const y = ref(window.scrollY)
 
-    const abortController = new AbortController()
+  const abortController = new AbortController()
 
-    onMounted(() => {
-        window.addEventListener('scroll', () => {
-            x.value = window.scrollX
-            y.value = window.scrollY
-        },
-            { signal: abortController.signal }
-        )
-    })
+  onMounted(() => {
+    window.addEventListener(
+      'scroll',
+      () => {
+        x.value = window.scrollX
+        y.value = window.scrollY
+      },
+      { signal: abortController.signal },
+    )
+  })
 
-    onUnmounted(() => {
-        abortController.abort()
-    })
+  onUnmounted(() => {
+    abortController.abort()
+  })
 
-    return { x, y }
+  return { x, y }
 }

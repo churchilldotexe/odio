@@ -26,6 +26,11 @@ Route::get('/earphone', function () {
     return Inertia::render('EarPhone');
 });
 
+// placeholder for show
+Route::get('/foo', function () {
+    return Inertia::render('Details');
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
