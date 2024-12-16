@@ -1,7 +1,5 @@
 <template>
-  <article
-    class="grid max-w-screen-xl gap-10 px-6 md:gap-16 md:px-10 lg:grid-cols-2 lg:gap-30 xl:px-0"
-  >
+  <article class="grid max-w-screen-xl gap-10 px-6 md:gap-16 md:px-10 lg:grid-cols-2 lg:gap-30 xl:px-0">
     <img
       class="w-full rounded-lg md:hidden"
       src="/assets/shared/mobile/image-best-gear.jpg"
@@ -20,9 +18,7 @@
     >
 
     <div class="space-y-8 md:px-14 lg:place-self-center">
-      <h3
-        class="mx-auto text-balance text-center text-2.5-xl font-bold uppercase md:text-pretty md:text-4xl lg:order-1 lg:max-w-none lg:text-balance lg:text-left"
-      >
+      <h3 class="mx-auto text-balance text-center text-2.5-xl font-bold uppercase md:text-pretty md:text-4xl lg:order-1 lg:max-w-none lg:text-balance lg:text-left">
         Bringing you the <strong class="text-coral">best</strong> audio gear
       </h3>
 

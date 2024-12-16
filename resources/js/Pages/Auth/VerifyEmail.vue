@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import PrimaryButton from '@/Components/PrimaryButton.vue'
-import GuestLayout from '@/Layouts/GuestLayout.vue'
-import { Head, Link, useForm } from '@inertiajs/vue3'
-import { computed } from 'vue'
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import GuestLayout from '@/Layouts/GuestLayout.vue';
+import { Head, Link, useForm } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
 const props = defineProps<{
-  status?: string
-}>()
+  status?: string;
+}>();
 
-const form = useForm({})
+const form = useForm({});
 
 function submit() {
-  form.post(route('verification.send'))
+  form.post(route('verification.send'));
 }
 
 const verificationLinkSent = computed(
-  () => props.status === 'verification-link-sent',
-)
+  () => props.status === 'verification-link-sent'
+);
 </script>
 
 <template>

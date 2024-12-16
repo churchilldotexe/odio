@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3'
-import { twMerge } from 'tailwind-merge'
+import { Link } from '@inertiajs/vue3';
+import { twMerge } from 'tailwind-merge';
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ inheritAttrs: false });
 </script>
 
 <!-- class=""  -->

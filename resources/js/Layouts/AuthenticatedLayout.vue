@@ -1,21 +1,19 @@
 <script setup lang="ts">
-import ApplicationLogo from '@/Components/ApplicationLogo.vue'
-import Dropdown from '@/Components/Dropdown.vue'
-import DropdownLink from '@/Components/DropdownLink.vue'
-import NavLink from '@/Components/NavLink.vue'
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
-import { Link } from '@inertiajs/vue3'
-import { ref } from 'vue'
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import Dropdown from '@/Components/Dropdown.vue';
+import DropdownLink from '@/Components/DropdownLink.vue';
+import NavLink from '@/Components/NavLink.vue';
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import { Link } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
-const showingNavigationDropdown = ref(false)
+const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
   <div>
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-      <nav
-        class="border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800"
-      >
+      <nav class="border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800">
         <!-- Primary Navigation Menu -->
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="flex h-16 justify-between">
@@ -23,9 +21,7 @@ const showingNavigationDropdown = ref(false)
               <!-- Logo -->
               <div class="flex shrink-0 items-center">
                 <Link :href="route('dashboard')">
-                  <ApplicationLogo
-                    class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
-                  />
+                  <ApplicationLogo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                 </Link>
               </div>
 
@@ -53,7 +49,7 @@ const showingNavigationDropdown = ref(false)
                         {{ $page.props.auth.user.name }}
 
                         <svg
-                          class="-me-0.5 ms-2 h-4 w-4"
+                          class="-me-0.5 ms-2 size-4"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                           fill="currentColor"
@@ -91,7 +87,7 @@ const showingNavigationDropdown = ref(false)
                 @click="showingNavigationDropdown = !showingNavigationDropdown"
               >
                 <svg
-                  class="h-6 w-6"
+                  class="size-6"
                   stroke="currentColor"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -142,9 +138,7 @@ const showingNavigationDropdown = ref(false)
           <!-- Responsive Settings Options -->
           <div class="border-t border-gray-200 pb-1 pt-4 dark:border-gray-600">
             <div class="px-4">
-              <div
-                class="text-base font-medium text-gray-800 dark:text-gray-200"
-              >
+              <div class="text-base font-medium text-gray-800 dark:text-gray-200">
                 {{ $page.props.auth.user.name }}
               </div>
               <div class="text-sm font-medium text-gray-500">

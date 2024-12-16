@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import ArrowIcon from '@/Components/Icon/ArrowIcon.vue'
-import { Link } from '@inertiajs/vue3'
+import ArrowIcon from '@/Components/Icon/ArrowIcon.vue';
+import { Link } from '@inertiajs/vue3';
 
 defineProps<{
-  imgSrc: string
-  title: string
-  href: string
-}>()
+  imgSrc: string;
+  title: string;
+  href: string;
+}>();
 </script>
 
 <template>

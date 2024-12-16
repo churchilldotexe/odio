@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import Footer from '@/Components/Footer/index.vue'
-import Nav from '@/Components/Nav/index.vue'
-import { Head, usePage } from '@inertiajs/vue3'
+import Footer from '@/Components/Footer/index.vue';
+import Nav from '@/Components/Nav/index.vue';
+import { Head, usePage } from '@inertiajs/vue3';
 
 defineProps<{
-  title: string
-}>()
+  title: string;
+}>();
 
-const currentPath = usePage().url
+const currentPath = usePage().url;
 </script>
 
 <template>

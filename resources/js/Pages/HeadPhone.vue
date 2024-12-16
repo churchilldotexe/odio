@@ -1,18 +1,16 @@
 <script setup lang="ts">
-import ProductArticle from '@/Components/Products/ProductArticle.vue'
-import ProductNav from '@/Components/Products/ProductNav.vue'
-import ProductShow from '@/Components/Products/ProductShow.vue'
-import SectionHeader from '@/Components/Products/SectionHeader.vue'
-import MainLayout from '@/Layouts/MainLayout.vue'
+import ProductArticle from '@/Components/Products/ProductArticle.vue';
+import ProductNav from '@/Components/Products/ProductNav.vue';
+import ProductShow from '@/Components/Products/ProductShow.vue';
+import SectionHeader from '@/Components/Products/SectionHeader.vue';
+import MainLayout from '@/Layouts/MainLayout.vue';
 </script>
 
 <template>
   <MainLayout title="Speakers">
     <SectionHeader>headphones </SectionHeader>
 
-    <section
-      class="mx-auto grid size-full max-w-screen-2xl justify-items-center gap-30 pb-30 pt-16 md:py-30"
-    >
+    <section class="mx-auto grid size-full max-w-screen-2xl justify-items-center gap-30 pb-30 pt-16 md:py-30">
       <!-- TODO: for desktop view it has reverse order prop ..
                         when mapping the reverse prop is for the odd index(e.g. 1,3,5) -->
 

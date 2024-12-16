@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import DangerButton from '@/Components/DangerButton.vue'
-import InputError from '@/Components/InputError.vue'
-import InputLabel from '@/Components/InputLabel.vue'
-import Modal from '@/Components/Modal.vue'
-import SecondaryButton from '@/Components/SecondaryButton.vue'
-import TextInput from '@/Components/TextInput.vue'
-import { useForm } from '@inertiajs/vue3'
-import { nextTick, ref } from 'vue'
+import DangerButton from '@/Components/DangerButton.vue';
+import InputError from '@/Components/InputError.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import Modal from '@/Components/Modal.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import TextInput from '@/Components/TextInput.vue';
+import { useForm } from '@inertiajs/vue3';
+import { nextTick, ref } from 'vue';
 
-const confirmingUserDeletion = ref(false)
-const passwordInput = ref<HTMLInputElement | null>(null)
+const confirmingUserDeletion = ref(false);
+const passwordInput = ref<HTMLInputElement | null>(null);
 
 const form = useForm({
-  password: '',
-})
+  password: ''
+});
 
 function confirmUserDeletion() {
-  confirmingUserDeletion.value = true
+  confirmingUserDeletion.value = true;
 
-  nextTick(() => passwordInput.value?.focus())
+  nextTick(() => passwordInput.value?.focus());
 }
 
 function deleteUser() {
@@ -27,16 +27,16 @@ function deleteUser() {
     onSuccess: () => closeModal(),
     onError: () => passwordInput.value?.focus(),
     onFinish: () => {
-      form.reset()
-    },
-  })
+      form.reset();
+    }
+  });
 }
 
 function closeModal() {
-  confirmingUserDeletion.value = false
+  confirmingUserDeletion.value = false;
 
-  form.clearErrors()
-  form.reset()
+  form.clearErrors();
+  form.reset();
 }
 </script>
 
