@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import ButtonLink from '../ButtonLink.vue';
 import { twMerge } from 'tailwind-merge';
+import Image from '../Image.vue';
 
 interface Props {
     imgSrcMobile: string;
@@ -28,12 +29,13 @@ const splittedTitle = computed(() => {
 });
 </script>
 
+<!-- :class="[twMerge(`flex size-full max-w-screen-xl flex-col gap-8 px-6 text-center md:gap-12 md:px-10 lg:gap-30 lg:px-0 ${$attrs.class}`), reverse ? 'lg:flex-row-reverse' : 'lg:flex-row']"> -->
 <template>
     <section
-        :class="[twMerge(`flex size-full max-w-screen-xl flex-col gap-8 px-6 text-center md:gap-12 md:px-10 lg:gap-30 lg:px-0 ${$attrs.class}`), reverse ? 'lg:flex-row-reverse' : 'lg:flex-row']">
-        <img class="size-full rounded-lg object-cover object-center md:hidden" :src="imgSrcMobile">
-        <img class="hidden size-full rounded-lg object-cover object-center md:block lg:hidden" :src="imgSrcTablet">
-        <img class=" hidden size-full rounded-lg object-cover object-center lg:block" :src="imgSrcDesktop">
+        :class='["flex size-full max-w-screen-xl flex-col gap-8 px-6 text-center md:gap-12 md:px-10 lg:gap-30 xl:px-0", reverse ? "lg:flex-row-reverse" : "lg:flex-row"]'>
+
+        <Image :img-src-mobile :img-src-tablet :img-src-desktop
+            class=" size-full rounded-lg object-cover object-center " />
 
         <div
             :class="[twMerge(`flex flex-col gap-6 md:gap-4 md:px-14 lg:items-start lg:self-center lg:px-0 lg:text-left ${innerClass}`)]">

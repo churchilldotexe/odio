@@ -1,5 +1,4 @@
-<script setup lang="ts">
-import ButtonLink from '@/Components/ButtonLink.vue';
+<script setup lang="ts">import ButtonLink from '@/Components/ButtonLink.vue'; import Image from '@/Components/Image.vue';
 import ProductArticle from '@/Components/Products/ProductArticle.vue';
 import ProductNav from '@/Components/Products/ProductNav.vue';
 import ProductShow from '@/Components/Products/ProductShow.vue';
@@ -33,12 +32,14 @@ const decrement = () => {
         <div class="grid gap-30 pb-30 pt-6 ">
             <section class="grid gap-[5.5rem] px-6 ">
                 <!-- TODO:  extract this make it dynamic (compound component) -->
-                <ProductShow img-src-mobile="/assets/product-zx9-speaker/mobile/image-product.jpg"
+                <ProductShow is-new title="ZX9 SPEAKER"
+                    img-src-mobile="/assets/product-zx9-speaker/mobile/image-product.jpg"
                     img-src-tablet="/assets/product-zx9-speaker/tablet/image-product.jpg"
-                    img-src-desktop="/assets/product-zx9-speaker/desktop/image-product.jpg" title="ZX9 SPEAKER"
+                    img-src-desktop="/assets/product-zx9-speaker/desktop/image-product.jpg"
                     summary="Upgrade your sound system with the all new ZX9 active speaker. It’s a bookshelf speaker system that offers truly wireless connectivity -- creating new possibilities for more pleasing and practical audio setups."
-                    is-new class="px-0 md:grid md:grid-cols-2 md:gap-16 md:px-0 lg:px-0"
+                    class="px-0 md:grid md:grid-cols-2 md:gap-16 md:px-0 lg:px-0"
                     inner-class="text-left self-center text-left md:px-0 ">
+
                     <p class="text-lg font-bold">$4,500</p>
 
                     <div class=" grid grid-cols-[auto,1fr] gap-4 ">
@@ -110,49 +111,52 @@ const decrement = () => {
                     </ul>
                 </section>
 
-                <div class="flex flex-col gap-5 md:flex-row md:flex-wrap">
-                    <img class="rounded-lg md:hidden" src="/assets/product-zx9-speaker/mobile/image-gallery-1.jpg"
-                        alt="closed up speaker">
-                    <img class="hidden rounded-lg md:block lg:hidden"
-                        src="/assets/product-zx9-speaker/tablet/image-gallery-1.jpg" alt="closed up speaker">
-                    <img class="hidden rounded-lg lg:block"
-                        src="/assets/product-zx9-speaker/desktop/image-gallery-1.jpg" alt="closed up speaker">
+                <!-- FIX: masonry -->
+                <div class="columns-2 bg-red-100">
 
-                    <img class="rounded-lg md:hidden" src="/assets/product-zx9-speaker/mobile/image-gallery-2.jpg"
-                        alt="flowers books speaker">
-                    <img class="hidden rounded-lg md:block lg:hidden"
-                        src="/assets/product-zx9-speaker/tablet/image-gallery-2.jpg" alt="flowers books speaker">
-                    <img class="hidden rounded-lg lg:block"
-                        src="/assets/product-zx9-speaker/desktop/image-gallery-2.jpg" alt="flowers books speaker">
+                    <Image img-src-mobile="/assets/product-zx9-speaker/mobile/image-gallery-1.jpg"
+                        img-src-tablet="/assets/product-zx9-speaker/tablet/image-gallery-1.jpg"
+                        img-src-desktop="/assets/product-zx9-speaker/desktop/image-gallery-1.jpg"
+                        class=" aspect-auto rounded-lg object-cover object-center" alt="closed up speaker" />
 
-                    <img class=" rounded-lg md:hidden" src="/assets/product-zx9-speaker/mobile/image-gallery-3.jpg"
-                        alt="two speakers">
+                    <Image img-src-mobile="/assets/product-zx9-speaker/mobile/image-gallery-2.jpg"
+                        img-src-tablet="/assets/product-zx9-speaker/tablet/image-gallery-2.jpg"
+                        img-src-desktop="/assets/product-zx9-speaker/desktop/image-gallery-2.jpg"
+                        alt="flowers books speaker" class="aspect-auto rounded-lg object-cover object-center" />
 
-                    <img class="hidden rounded-lg md:block lg:hidden"
-                        src="/assets/product-zx9-speaker/tablet/image-gallery-3.jpg" alt="two speakers">
-                    <img class="hidden rounded-lg lg:block"
-                        src="/assets/product-zx9-speaker/desktop/image-gallery-3.jpg" alt="two speakers">
+                    <Image img-src-mobile="/assets/product-zx9-speaker/mobile/image-gallery-3.jpg"
+                        img-src-tablet="/assets/product-zx9-speaker/tablet/image-gallery-3.jpg"
+                        img-src-desktop="/assets/product-zx9-speaker/desktop/image-gallery-3.jpg"
+                        class=" size-max rounded-lg object-cover object-center" alt="two speakers" />
+
+
                 </div>
             </section>
 
             <article class="grid gap-10 px-6 text-center ">
                 <h3 class="text-2xl font-bold uppercase">You may also like</h3>
-                <!-- TODO: change image -->
-                <ul class="grid gap-14 md:grid-cols-3">
+                <ul class="grid gap-14 md:grid-cols-3 md:gap-3">
                     <li class="flex flex-col items-center gap-6">
-                        <img src="/assets/shared/mobile/image-zx7-speaker.jpg" alt="black speaker">
+                        <Image img-src-mobile="/assets/shared/mobile/image-zx7-speaker.jpg"
+                            img-src-tablet="/assets/shared/tablet/image-zx7-speaker.jpg"
+                            img-src-desktop="/assets/shared/desktop/image-zx7-speaker.jpg" alt="black speaker" />
                         <h4 class="text-2xl font-bold uppercase">zx7 speaker</h4>
                         <ButtonLink href="#" />
                     </li>
 
                     <li class="flex flex-col items-center gap-6">
-                        <img src="/assets/shared/mobile/image-xx99-mark-one-headphones.jpg" alt="black speaker">
+                        <Image img-src-mobile="/assets/shared/mobile/image-xx99-mark-one-headphones.jpg"
+                            img-src-tablet="/assets/shared/tablet/image-xx99-mark-one-headphones.jpg"
+                            img-src-desktop="/assets/shared/desktop/image-xx99-mark-one-headphones.jpg"
+                            alt="black speaker" />
                         <h4 class="text-2xl font-bold uppercase">xx99 mark I</h4>
                         <ButtonLink href="#" />
                     </li>
 
                     <li class="flex flex-col items-center gap-6">
-                        <img src="/assets/shared/mobile/image-xx59-headphones.jpg" alt="black speaker">
+                        <Image img-src-mobile="/assets/shared/mobile/image-xx59-headphones.jpg"
+                            img-src-tablet="/assets/shared/tablet/image-xx59-headphones.jpg"
+                            img-src-desktop="/assets/shared/desktop/image-xx59-headphones.jpg" alt="black speaker" />
                         <h4 class="text-2xl font-bold uppercase">xx59</h4>
                         <ButtonLink href="#" />
                     </li>
