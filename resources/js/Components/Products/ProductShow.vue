@@ -48,7 +48,7 @@ const splittedTitle = computed(() => {
                 {{ splittedTitle.lastWord }}
             </h2>
 
-            <p class="font-medium text-black/50 md:py-2">
+            <p class="font-medium text-black/50 md:py-2 ">
                 {{ summary }}
             </p>
             <slot>
