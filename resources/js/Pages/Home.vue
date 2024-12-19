@@ -7,9 +7,9 @@ import MainLayout from '@/Layouts/MainLayout.vue';
 
 <template>
     <MainLayout title="Home">
-        <div class="grid justify-items-center gap-30 pb-30 text-center md:gap-24 md:pb-24 lg:gap-30 lg:pb-30">
+        <div class="grid  justify-items-center gap-30 pb-30 text-center md:gap-24 md:pb-24 lg:gap-30 lg:pb-30">
             <section
-                class="before:content-[` `] relative grid h-[600px] w-full place-items-center gap-4 before:absolute before:-z-10 before:hidden before:size-full before:bg-[#191919] md:h-[729px] before:lg:block">
+                class="relative grid h-[600px] w-full place-items-center gap-4 before:absolute before:-z-10 before:hidden before:size-full before:bg-[#191919] before:content-[''] md:h-[729px] before:lg:block">
                 <img class="absolute -z-10 size-full object-cover object-center lg:hidden"
                     src="/assets/home/tablet/image-header.jpg" alt="Black HeadPhone">
                 <img class="absolute -z-10 hidden size-full max-w-screen-2xl object-cover object-center lg:block"

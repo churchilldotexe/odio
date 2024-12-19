@@ -1,4 +1,5 @@
 <script setup lang="ts">import ButtonLink from '@/Components/ButtonLink.vue'; import Image from '@/Components/Image.vue';
+import OrderCounter from '@/Components/OrderCounter.vue';
 import ProductArticle from '@/Components/Products/ProductArticle.vue';
 import ProductNav from '@/Components/Products/ProductNav.vue';
 import ProductShow from '@/Components/Products/ProductShow.vue';
@@ -44,21 +45,7 @@ const decrement = () => {
                     <p class="text-lg font-bold md:pb-8 md:pt-6 ">$4,500</p>
 
                     <div class=" grid grid-cols-[auto,1fr] gap-4 ">
-                        <div class="grid h-full w-fit max-w-30 grid-cols-3 ">
-                            <button
-                                class=" bg-gray-100 text-sm font-bold text-black/25 disabled:cursor-not-allowed hocus-visible:text-coral hocus-visible:disabled:text-black/25"
-                                @click="decrement" :disabled="orderAmnt <= 0">
-                                &minus;
-                            </button>
-                            <input
-                                class=" pointer-events-none appearance-none border-none bg-gray-100 text-center text-sm font-bold"
-                                type="number" min="0" placeholder="0" v-model="orderAmnt" readonly>
-                            <button
-                                class=" bg-gray-100 text-sm font-bold text-black/25 disabled:cursor-not-allowed hocus-visible:text-coral "
-                                @click="increment">
-                                &plus;
-                            </button>
-                        </div>
+                        <OrderCounter />
 
                         <ButtonLink class="" href="#">Add to cart</ButtonLink>
                     </div>
