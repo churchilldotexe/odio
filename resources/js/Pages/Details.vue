@@ -1,4 +1,5 @@
-<script setup lang="ts">import ButtonLink from '@/Components/ButtonLink.vue'; import Image from '@/Components/Image.vue';
+<script setup lang="ts">import BackLink from '@/Components/BackLink.vue';
+import ButtonLink from '@/Components/ButtonLink.vue'; import Image from '@/Components/Image.vue';
 import OrderCounter from '@/Components/OrderCounter.vue';
 import ProductArticle from '@/Components/Products/ProductArticle.vue';
 import ProductNav from '@/Components/Products/ProductNav.vue';
@@ -11,12 +12,8 @@ import { Link } from '@inertiajs/vue3';
     <!-- TODO: change this make this dynamic (earphone) -->
     <MainLayout title="earphone Details">
         <!-- TODO: go back to its parent (e.g. /earphone or history stack) -->
-        <div
-            class="mx-auto max-w-screen-xl px-6 pt-6 font-medium capitalize text-black/50 hocus-visible:text-black md:pt-8 lg:pt-20 xl:px-0">
-            <Link href="/">
-            go back
-            </Link>
-        </div>
+        <BackLink />
+
         <div class="mx-auto grid max-w-screen-xl gap-30 pb-30 pt-6 lg:gap-40 lg:pb-40 lg:pt-14 ">
             <section class="grid gap-[5.5rem] px-6 xl:px-0">
                 <!-- TODO:  extract this make it dynamic (compound component) -->

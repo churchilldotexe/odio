@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BackLink from '@/Components/BackLink.vue';
 import MainLayout from '@/Layouts/MainLayout.vue';
 
 
@@ -6,6 +7,9 @@ import MainLayout from '@/Layouts/MainLayout.vue';
 
 <template>
     <MainLayout title="Checkout Page">
-        <div>domo</div>
+        <BackLink />
+        <section class="bg-white">
+            foobar
+        </section>
     </MainLayout>
 </template>
