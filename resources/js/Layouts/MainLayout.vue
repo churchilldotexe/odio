@@ -13,7 +13,7 @@ defineProps<{
 
     <Head :title="title" />
 
-    <div class="relative flex min-h-screen flex-col font-manrope">
+    <div id="main-layout" class="relative flex min-h-screen flex-col font-manrope">
 
 
         <TheHeader />

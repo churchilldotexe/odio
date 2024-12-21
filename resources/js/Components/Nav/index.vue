@@ -4,6 +4,7 @@ import ApplicationLogo from '../Icon/ApplicationLogo.vue';
 import BurgerIcon from './BurgerIcon.vue';
 import Cart from '../Cart/Cart.vue';
 
+
 </script>
 
 <template>

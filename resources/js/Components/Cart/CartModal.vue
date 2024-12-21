@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue';
 
 const { showModal = false } = defineProps<{
-    showModal?: boolean
+     showModal?: boolean
 }>()
 
 const emit = defineEmits<{ 'update:showModal': [value: boolean] }>()
