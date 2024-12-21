@@ -5,20 +5,6 @@ import ProductNav from '@/Components/Products/ProductNav.vue';
 import ProductShow from '@/Components/Products/ProductShow.vue';
 import MainLayout from '@/Layouts/MainLayout.vue';
 import { Link } from '@inertiajs/vue3';
-import { ref } from 'vue';
-
-const orderAmnt = ref(1)
-
-const increment = () => {
-    orderAmnt.value++
-}
-
-const decrement = () => {
-    if (orderAmnt.value > 0) {
-        orderAmnt.value--
-    }
-}
-
 </script>
 
 <template>
@@ -167,19 +153,3 @@ const decrement = () => {
         </div>
     </MainLayout>
 </template>
-
-
-<style>
-/* Remove spinners in Webkit browsers */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* Remove spinner in Firefox */
-input[type="number"] {
-    -moz-appearance: textfield;
-    appearance: textfield;
-}
-</style>
