@@ -3,6 +3,7 @@ import { inject, Ref } from 'vue';
 import CartIcon from '../Nav/CartIcon.vue';
 import OrderCounter from '../OrderCounter.vue';
 import { modal } from '@/keys';
+import ButtonLink from '../ButtonLink.vue';
 
 
 const { isModalOpen, handleModalToggle } = inject(modal) as {
@@ -19,7 +20,7 @@ const { isModalOpen, handleModalToggle } = inject(modal) as {
     - [] for closing the modal attach the following:
         - [x] esc keydown that will trigger closing when modal is ON
         - [x] clicking outside the modal will close the modal (vshow-off to preserve state)
-        - [] clicking checkout will redirect to checkout page and close the modal
+        - [x] clicking checkout will redirect to checkout page and close the modal
     - [x] will disable the hide nav on scroll when modal is open
 -->
 
@@ -56,7 +57,7 @@ const { isModalOpen, handleModalToggle } = inject(modal) as {
                 <p class="font-medium text-black/50">TOTAL</p>
                 <p class="text-lg font-bold">$ 5,396</p>
             </div>
-            <button class="w-full bg-coral py-4 text-sm font-bold text-white">Checkout</button>
+            <ButtonLink href="/checkout" class="w-full text-center text-sm">Checkout</ButtonLink>
         </section>
     </Transition>
 
