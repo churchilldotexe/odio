@@ -5,7 +5,6 @@ import ProductArticle from '@/Components/Products/ProductArticle.vue';
 import ProductNav from '@/Components/Products/ProductNav.vue';
 import ProductShow from '@/Components/Products/ProductShow.vue';
 import MainLayout from '@/Layouts/MainLayout.vue';
-import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
