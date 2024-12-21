@@ -27,7 +27,8 @@ const { isModalOpen, handleModalToggle } = inject(modal) as {
 
 <template>
     <button @click="handleModalToggle" aria-label="open cart" class="md:ml-auto lg:ml-0">
-        <CartIcon class="fill-current text-gray-500 hocus-visible:stroke-coral " />
+        <CartIcon class="fill-current text-gray-500 hocus-visible:stroke-coral "
+            :class="[isModalOpen ? 'stroke-coral' : '']" />
     </button>
 
     <!-- attach absolutely with nav parent  -->
