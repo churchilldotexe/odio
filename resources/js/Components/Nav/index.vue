@@ -44,12 +44,8 @@ import Cart from '../Cart/Cart.vue';
                 </Link>
             </li>
         </ul>
-
-        <!-- <button @click="isMenuOpen = true" class=" md:ml-auto lg:ml-0" aria-label="open cart"> -->
-        <!--     <CartIcon class="fill-current text-gray-500 hocus-visible:stroke-coral " /> -->
-        <!-- </button> -->
-
-        <Cart />
+        <!-- FIX: try popover -->
+        <Cart  />
 
     </nav>
 </template>
