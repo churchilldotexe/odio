@@ -31,6 +31,10 @@ Route::get('/foo', function () {
     return Inertia::render('Details');
 });
 
+Route::get('/checkout', function () {
+    return Inertia::render('Checkout');
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
