@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, onMounted, onUnmounted, Ref } from 'vue';
+import { inject, Ref } from 'vue';
 import CartIcon from '../Nav/CartIcon.vue';
 import OrderCounter from '../OrderCounter.vue';
 import { modal } from '@/keys';
@@ -10,30 +10,7 @@ const { isModalOpen, handleModalToggle } = inject(modal) as {
     handleModalToggle: () => void;
 }
 
-const abortController = new AbortController()
 
-onMounted(() => {
-
-    document.addEventListener('click', (e) => {
-        const target = e.target as HTMLElement
-        const isBackdrop = target.matches('#modal-backdrop')
-
-        if (isBackdrop) {
-            handleModalToggle()
-        }
-
-    }, { signal: abortController.signal })
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === "Escape" && isModalOpen.value) {
-            handleModalToggle()
-        }
-    })
-})
-
-onUnmounted(() => {
-    abortController.abort()
-})
 </script>
 
 <!-- TODO:
@@ -58,7 +35,7 @@ onUnmounted(() => {
         enter-from-class="scale-y-0" enter-to-class="scale-y-100"
         leave-active-class="transition-transform origin-top duration-200 motion-reduce:transition-none"
         leave-to-class="scale-y-0">
-        <section id="cart-modal" v-show="isModalOpen" @keydown.esc="handleModalToggle"
+        <section id="cart-modal" v-show="isModalOpen" @keyup.esc="handleModalToggle"
             class="absolute right-0 top-full m-7 grid max-w-md gap-8 rounded-lg bg-white px-7 py-8 md:mr-0">
             <div class="flex items-center justify-between gap-4 ">
                 <h2 class="text-lg font-bold uppercase">Cart (3)</h2>
@@ -83,8 +60,7 @@ onUnmounted(() => {
     </Transition>
 
     <!-- act as a backdrop, have lower z-index with nav but higher than everybody else because header have higher stacking context than other -->
-
-    <div id="modal-backdrop" role="backdrop" v-if="isModalOpen"
+    <div @click="handleModalToggle" id="modal-backdrop" role="backdrop" v-if="isModalOpen"
         class="fixed inset-0 -z-10 h-screen w-full bg-black/40" />
 
 </template>
