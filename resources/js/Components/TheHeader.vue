@@ -29,10 +29,12 @@ const position = computed(() => {
 })
 
 </script>
+
 <template>
     <header class="top-0 z-10 w-full origin-top  transition-transform md:px-6 lg:px-0" :class="[
         scrolledDown ? 'fixed scale-y-0' : `${position} scale-y-100`,
         navBg]" :inert="scrolledDown">
+
         <Nav />
     </header>
 </template>
