@@ -40,7 +40,7 @@ const position = computed(() => {
 </script>
 
 <template>
-    <header class="top-0 z-10 w-full origin-top  transition-transform md:px-6 lg:px-0" :class="[
+    <header class="top-0 z-10 w-full origin-top  transition-transform md:px-6 xl:px-0" :class="[
         (scrolledDown && !isModalOpen) ? 'fixed scale-y-0' : `${position} scale-y-100`,
         navBg]" :inert="scrolledDown && !isModalOpen">
 
