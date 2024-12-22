@@ -3,6 +3,14 @@ import { Link, usePage } from '@inertiajs/vue3';
 import ApplicationLogo from '../Icon/ApplicationLogo.vue';
 import BurgerIcon from './BurgerIcon.vue';
 import Cart from '../Order/Cart.vue';
+import { navModal } from '@/keys';
+import { inject, Ref } from 'vue';
+
+
+const { handleModalToggle } = inject(navModal) as {
+    isModalOpen: Ref<boolean, boolean>;
+    handleModalToggle: () => void;
+}
 
 const currentPath = usePage().url
 
@@ -21,9 +29,10 @@ const links = [
         "md:justify-start md:px-0 lg:justify-between",
     ]'>
         <!-- TODO: should be checkbox -->
-        <Link href="#" class="lg:hidden" aria-label="open menu">
-        <BurgerIcon class="fill-current text-gray-500" />
-        </Link>
+        <button @click="handleModalToggle" popovertarget="top-nav-bar" class="lg:hidden" aria-label="open menu">
+            <BurgerIcon class="fill-current text-gray-500" />
+        </button>
+
 
 
         <Link href="/" class="">
