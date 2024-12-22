@@ -24,6 +24,6 @@ defineOptions({ inheritAttrs: false })
     <div :class="twMerge(`flex flex-col gap-2 ${$attrs.class}`)">
         <label :for="name" :class="[`text-xs font-bold capitalize ${labelClass} `]">{{ label }}</label>
         <input v-model="modelValue" :id="name" :name="name" v-bind="$attrs"
-            :class="twMerge(`rounded-lg border border-[#cfcfcf] px-6 py-4 text-sm font-bold placeholder:text-black/40 `)" />
+            :class="twMerge(`rounded-lg border hocus-visible:border-coral hocus-visible:cursor-pointer active:cursor-text border-[#cfcfcf] px-6 py-4 text-sm font-bold placeholder:text-black/40 `)" />
     </div>
 </template>
