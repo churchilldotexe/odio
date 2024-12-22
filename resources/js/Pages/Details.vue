@@ -1,10 +1,17 @@
-<script setup lang="ts">import BackLink from '@/Components/BackLink.vue';
-import ButtonLink from '@/Components/ButtonLink.vue'; import Image from '@/Components/Image.vue';
-import OrderCounter from '@/Components/OrderCounter.vue';
+<script setup lang="ts">
+import BackLink from '@/Components/BackLink.vue';
+import ButtonLink from '@/Components/ButtonLink.vue';
+import Image from '@/Components/Image.vue';
+import OrderCounter from '@/Components/Order/OrderCounter.vue';
 import ProductArticle from '@/Components/Products/ProductArticle.vue';
 import ProductNav from '@/Components/Products/ProductNav.vue';
 import ProductShow from '@/Components/Products/ProductShow.vue';
 import MainLayout from '@/Layouts/MainLayout.vue';
+import { ref } from 'vue';
+
+// TODO: sync with pinia
+
+const orderCount = ref(1);
 </script>
 
 <template>
@@ -26,8 +33,8 @@ import MainLayout from '@/Layouts/MainLayout.vue';
 
                     <p class="text-lg font-bold md:pb-8 md:pt-6 ">$4,500</p>
 
-                    <div class=" grid grid-cols-[auto,1fr] gap-4 ">
-                        <OrderCounter />
+                    <div class="grid grid-cols-[auto,1fr] gap-4 ">
+                        <OrderCounter v-model:order-count="orderCount" />
 
                         <ButtonLink class="" href="#">Add to cart</ButtonLink>
                     </div>
