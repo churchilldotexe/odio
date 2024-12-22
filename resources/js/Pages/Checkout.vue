@@ -7,8 +7,10 @@ import { ref } from 'vue';
 import SummaryRow from '@/Components/Order/SummaryRow.vue';
 import ButtonLink from '@/Components/ButtonLink.vue';
 import CODIcon from '@/Components/Order/CODIcon.vue';
+import OrderConfirmation from '@/Components/Order/OrderConfirmation.vue';
 
 const email = ref<string>('')
+const showConfirmation = ref(false)
 </script>
 
 <template>
@@ -127,7 +129,11 @@ const email = ref<string>('')
                 </div>
 
                 <!-- TODO: this will popout the thank you component -->
-                <ButtonLink href="#" class="h-fit w-full text-center">Continue & pay</ButtonLink>
+                <button @click="showConfirmation = true"
+                    class=" h-fit w-full bg-coral px-8 py-4 text-xs font-bold uppercase text-white transition-colors duration-300 hocus-visible:bg-coral-light lg:ml-0 ">
+                    Continue & pay
+                </button>
+                <OrderConfirmation v-model:show-modal="showConfirmation" />
 
             </section>
         </div>
