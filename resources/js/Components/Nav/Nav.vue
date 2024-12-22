@@ -2,7 +2,7 @@
 import { Link, usePage } from '@inertiajs/vue3';
 import ApplicationLogo from '../Icon/ApplicationLogo.vue';
 import BurgerIcon from './BurgerIcon.vue';
-import Cart from '../Cart/Cart.vue';
+import Cart from '../Order/Cart.vue';
 
 const currentPath = usePage().url
 

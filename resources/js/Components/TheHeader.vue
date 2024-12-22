@@ -2,7 +2,7 @@
 import { useScroll } from '@/Composables/useScroll';
 import { usePage } from '@inertiajs/vue3';
 import { computed, provide, ref, watch } from 'vue';
-import Nav from '@/Components/Nav/index.vue';
+import Nav from '@/Components/Nav/Nav.vue';
 import { modal } from '@/keys';
 
 const isModalOpen = ref<boolean>(false)

@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 
+const model = defineModel<number>('orderCount', { required: true, default: 1 })
 
-const orderAmnt = ref<number>(1)
 
 const increment = () => {
-    orderAmnt.value++
+    model.value++
 }
 
 const decrement = () => {
-    if (orderAmnt.value > 0) {
-        orderAmnt.value--
+    if (model.value > 0) {
+        model.value--
     }
 }
 </script>
@@ -18,11 +17,11 @@ const decrement = () => {
     <div class="grid h-full w-fit max-w-32 grid-cols-[.75fr,1fr,.75fr] ">
         <button
             class=" bg-gray-100 text-sm font-bold text-black/25 disabled:cursor-not-allowed hocus-visible:text-coral hocus-visible:disabled:text-black/25"
-            @click="decrement" :disabled="orderAmnt <= 0">
+            @click="decrement" :disabled="model <= 0">
             &minus;
         </button>
         <input class="pointer-events-none w-full appearance-none border-none bg-gray-100 text-center text-sm font-bold"
-            type="number" min="0" v-model="orderAmnt" readonly>
+            type="number" min="0" v-model="model" readonly>
         <button
             class=" bg-gray-100 text-sm font-bold text-black/25 disabled:cursor-not-allowed hocus-visible:text-coral "
             @click="increment">

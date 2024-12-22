@@ -29,10 +29,9 @@ const splittedTitle = computed(() => {
 });
 </script>
 
-<!-- :class="[twMerge(`flex size-full max-w-screen-xl flex-col gap-8 px-6 text-center md:gap-12 md:px-10 lg:gap-30 lg:px-0 ${$attrs.class}`), reverse ? 'lg:flex-row-reverse' : 'lg:flex-row']"> -->
 <template>
     <section
-        :class='["flex size-full max-w-screen-xl flex-col gap-8 px-6 text-center md:gap-12 md:px-10 lg:gap-30 xl:px-0", reverse ? "lg:flex-row-reverse" : "lg:flex-row"]'>
+        :class='[twMerge(`flex size-full max-w-screen-xl flex-col gap-8 px-6 text-center md:gap-12 md:px-10 lg:gap-30 xl:px-0 ${$attrs.class}`, reverse ? "lg:flex-row-reverse" : "lg:flex-row")]'>
 
         <Image :img-src-mobile :img-src-tablet :img-src-desktop
             class=" size-full rounded-lg object-cover object-center " />

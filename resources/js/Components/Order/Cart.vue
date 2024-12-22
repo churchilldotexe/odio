@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { inject, Ref } from 'vue';
 import CartIcon from '../Nav/CartIcon.vue';
-import OrderCounter from '../OrderCounter.vue';
 import { modal } from '@/keys';
 import ButtonLink from '../ButtonLink.vue';
+import OrderedOverview from '@/Components/Order/OrderOverview.vue';
+import SummaryRow from './SummaryRow.vue';
 
 
 const { isModalOpen, handleModalToggle } = inject(modal) as {
@@ -44,19 +45,8 @@ const { isModalOpen, handleModalToggle } = inject(modal) as {
                 <button class="font-medium text-black/50 underline">Remove all</button>
             </div>
 
-            <div class="grid grid-cols-[.5fr,1fr,1fr] gap-4">
-                <img class="aspect-square rounded-lg"
-                    src="/assets/product-zx9-speaker/mobile/image-category-page-preview.jpg" alt="cart order preview">
-                <div class="flex flex-col justify-center gap-1 self-stretch ">
-                    <p class="font-bold uppercase">xx99 mk II</p>
-                    <p class=" text-sm font-bold uppercase text-black/50">$ 2,999</p>
-                </div>
-                <OrderCounter class=" h-min w-fit self-center justify-self-end " />
-            </div>
-            <div class="flex items-center justify-between">
-                <p class="font-medium text-black/50">TOTAL</p>
-                <p class="text-lg font-bold">$ 5,396</p>
-            </div>
+            <OrderedOverview />
+            <SummaryRow label="TOTAL" value="5,396" />
             <ButtonLink href="/checkout" class="w-full text-center text-sm">Checkout</ButtonLink>
         </section>
     </Transition>
