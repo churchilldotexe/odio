@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Product::class);
             $table->enum('image_type', ['main', 'category']);
-            $table->string('device_type', ['mobile', 'tablet', 'desktop']);
+            $table->enum('device_type', ['mobile', 'tablet', 'desktop']);
             $table->string('url');
             $table->timestamps();
             $table->unique('product_id', 'image_type', 'device_type');
