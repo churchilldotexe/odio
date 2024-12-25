@@ -97,22 +97,22 @@ const orderCount = ref(1);
 
                 </div>
                 <!-- FIX: masonry -->
-                <div class="columns-2 space-y-5 bg-red-100">
+                <div id="masonry" class="grid gap-5 bg-red-100 md:grid-cols-2 md:grid-rows-2 ">
 
                     <Image img-src-mobile="/assets/product-zx9-speaker/mobile/image-gallery-1.jpg"
                         img-src-tablet="/assets/product-zx9-speaker/tablet/image-gallery-1.jpg"
                         img-src-desktop="/assets/product-zx9-speaker/desktop/image-gallery-1.jpg"
-                        class=" rounded-lg object-cover object-center" alt="closed up speaker" />
+                        class="rounded-lg object-cover object-center " alt="closed up speaker" />
 
                     <Image img-src-mobile="/assets/product-zx9-speaker/mobile/image-gallery-2.jpg"
                         img-src-tablet="/assets/product-zx9-speaker/tablet/image-gallery-2.jpg"
                         img-src-desktop="/assets/product-zx9-speaker/desktop/image-gallery-2.jpg"
-                        alt="flowers books speaker" class=" rounded-lg object-cover object-center" />
+                        alt="flowers books speaker" class="rounded-lg object-cover object-center " />
 
                     <Image img-src-mobile="/assets/product-zx9-speaker/mobile/image-gallery-3.jpg"
                         img-src-tablet="/assets/product-zx9-speaker/tablet/image-gallery-3.jpg"
                         img-src-desktop="/assets/product-zx9-speaker/desktop/image-gallery-3.jpg"
-                        class=" rounded-lg object-cover object-center" alt="two speakers" />
+                        class=" rounded-lg object-cover object-center " alt="two speakers" />
 
 
                 </div>
@@ -156,3 +156,35 @@ const orderCount = ref(1);
         </div>
     </MainLayout>
 </template>
+
+
+<style>
+#masonry {
+    grid-template-areas:
+        "first"
+        "second"
+        "third";
+}
+
+#masonry> :nth-child(1) {
+    grid-area: first;
+}
+
+
+#masonry> :nth-child(2) {
+    grid-area: second;
+}
+
+
+#masonry> :nth-child(3) {
+    grid-area: third;
+}
+
+@media (min-width:768px) {
+    #masonry {
+        grid-template-areas:
+            "first third"
+            "second third";
+    }
+}
+</style>
