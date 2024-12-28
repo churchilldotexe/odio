@@ -17,7 +17,19 @@ class ProductImageFactory extends Factory
     public function definition(): array
     {
         return [
-            //
         ];
     }
 }
+
+// public function up(): void
+// {
+//     Schema::create('product_images', function (Blueprint $table) {
+//         $table->id();
+//         $table->foreignIdFor(Product::class)->constrained()->cascadeOnDelete();
+//         $table->string('image_type')->default(ImageType::MAIN->value);
+//         $table->string('device_type')->default(DeviceType::MOBILE->value);
+//         $table->string('image_path');
+//         $table->timestamps();
+//         $table->unique('product_id', 'image_type', 'device_type');
+//     });
+// }

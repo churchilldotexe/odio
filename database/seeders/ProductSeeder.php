@@ -30,6 +30,5 @@ class ProductSeeder extends Seeder
                 'features' => $product['features'],
             ]);
         });
-
     }
 }

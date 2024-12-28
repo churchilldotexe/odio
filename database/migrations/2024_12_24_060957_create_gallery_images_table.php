@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\DeviceType;
+use App\Enums\ImagePosition;
 use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,10 +16,10 @@ return new class extends Migration
     {
         Schema::create('gallery_images', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Product::class);
-            $table->enum('order', ['first', 'second', 'third']);
-            $table->enum('device_type', ['mobile', 'tablet', 'desktop']);
-            $table->string('url');
+            $table->foreignIdFor(Product::class)->constrained()->cascadeOnDelete();
+            $table->string('image_position')->default(ImagePosition::FIRST->value);
+            $table->string('device_type')->default(DeviceType::MOBILE->value);
+            $table->string('image_path');
             $table->timestamps();
             $table->unique(['product_id', 'order', 'device_type']);
         });

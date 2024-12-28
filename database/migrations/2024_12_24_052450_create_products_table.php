@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ProductCategory;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +15,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('category', ['earphones', 'headphones', 'speakers']);
+            $table->string('category')->default(ProductCategory::EARPHONES->value);
             $table->boolean('new');
             $table->decimal('price');
             $table->text('description');
