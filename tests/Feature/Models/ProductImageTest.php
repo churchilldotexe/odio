@@ -64,9 +64,10 @@ it('fails when device type is invalid in the images array', function () {
 
     $product = Product::factory()->create();
 
+    $productImage = new ProductImage;
+
     // Expect the exception for invalid enum value
     $this->expectException(\ValueError::class); // Enum throws ValueError for invalid cases
 
-    $productImage = new ProductImage;
     $productImage->createByType($product->id, ImageType::MAIN, $images);
 });
