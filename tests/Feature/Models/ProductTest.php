@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Unit;
-
 use App\Models\Product;
 use Database\Seeders\ProductSeeder;
 
@@ -25,4 +23,13 @@ it('should populate db using seed', function () {
     $exampleProduct = Product::where('name', 'YX1 Wireless Earphones')->first();
     expect($exampleProduct)->not->toBeNull();
     expect($exampleProduct->category)->toBe('earphones');
+});
+
+it('should also create the related tables ', function () {
+    $product = Product::factory()->create();
+
+    $products = $product->createWithImages();
+
+    expect(Product::where('id', $product->id)->exists())->toBeTrue();
+
 });
