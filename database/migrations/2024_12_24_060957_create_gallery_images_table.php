@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('device_type')->default(DeviceType::MOBILE->value);
             $table->string('image_path');
             $table->timestamps();
-            $table->unique(['product_id', 'order', 'device_type']);
+            $table->unique(['product_id', 'image_position', 'device_type']);
         });
     }
 
