@@ -13,6 +13,23 @@ class ProductInclusion extends Model
 
     protected $fillable = ['product_id', 'item_name', 'quantity'];
 
+    protected function casts(): array
+    {
+        return [
+            'quantity' => 'int',
+        ];
+    }
+
+    public function setQuantityAttribute(mixed $value): void
+    {
+
+        if (! is_numeric($value)) {
+            throw new \InvalidArgumentException('Quantity must be numeric');
+        }
+
+        $this->attributes['quantity'] = (int) $value;
+    }
+
     /**
      * @return BelongsTo<Product,ProductImage>
      */
