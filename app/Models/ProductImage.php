@@ -21,14 +21,23 @@ class ProductImage extends Model
     public function createByType(int $productId, ImageType $imageType, array $images): void
     {
 
-        collect($images)->each(function (string $image, string $deviceType) use ($productId, $imageType) {
-            self::create([
+        $result = collect($images)->map(function (string $image, string $deviceType) use ($productId, $imageType) {
+
+            $deviceTypeEnum = DeviceType::from($deviceType);
+            if (! $deviceTypeEnum) {
+                throw new \InvalidArgumentException("invalid device type: $deviceType ");
+            }
+
+            return [
                 'product_id' => $productId,
                 'image_type' => $imageType,
                 'image_path' => $image,
-                'device_type' => $deviceType,
-            ]);
-        });
+                'device_type' => $deviceTypeEnum,
+            ];
+
+        })->values()->all();
+
+        self::insert($result);
     }
 
     protected function casts(): array
