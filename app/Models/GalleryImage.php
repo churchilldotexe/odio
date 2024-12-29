@@ -23,18 +23,36 @@ class GalleryImage extends Model
         ];
     }
 
-    public function createByPosition(int $productId, string $position, array $galleryImages): void
+    public function createByPosition(int $productId, array $galleries): void
     {
-        $positionEnum = ImagePosition::from($position);
 
-        collect($galleryImages)->each(function (string $imagePath, string $deviceType) use ($productId, $position) {
-            self::create([
-                'product_id' => $productId,
-                'image_position' => $position,
-                'device_type' => $deviceType,
-                'image_path' => $imagePath,
-            ]);
-        });
+        $result = collect($galleries)->flatMap(function (array $galleryImages, string $position) use ($productId) {
+
+            $positionEnum = ImagePosition::from($position);
+            if (! $positionEnum) {
+                throw new \InvalidArgumentException("Invalid Gallery Position: $position");
+            }
+
+            return collect($galleryImages)->map(function (string $imagePath, string $deviceType) use ($productId, $positionEnum) {
+
+                $deviceTypeEnum = DeviceType::from($deviceType);
+                if (! $deviceTypeEnum) {
+                    throw new \InvalidArgumentException("Invalid device type: $deviceType");
+                }
+
+                return [
+                    'product_id' => $productId,
+                    'image_position' => $positionEnum,
+                    'device_type' => $deviceType,
+                    'image_path' => $imagePath,
+                ];
+            })->values();
+
+        })
+            ->values()
+            ->all();
+
+        self::insert($result);
     }
 
     /**
