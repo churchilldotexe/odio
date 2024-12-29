@@ -71,3 +71,15 @@ it('fails when device type is invalid in the images array', function () {
 
     $productImage->createByType($product->id, ImageType::MAIN, $images);
 });
+
+it('will throw an TypeError on invalid Image type using the helper createByType method', function () {
+
+    $product = Product::factory()->create();
+
+    $productImage = new ProductImage;
+
+    // Expect the exception for invalid enum value
+    $this->expectException(\TypeError::class); // Enum throws TypeError for invalid cases
+
+    $productImage->createByType($product->id, 'foobar', $this->validImages);
+});
