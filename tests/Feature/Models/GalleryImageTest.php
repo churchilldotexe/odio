@@ -30,43 +30,41 @@ beforeEach(function () {
 });
 
 it('should create gallery through product relationship', function () {
-    collect($this->galleries)->each(function (array $gallery, string $position) {
 
-        foreach ($gallery as $device => $path) {
-            $this->product->galleryImages()->create([
+    $result = collect($this->galleries)->flatmap(function (array $gallery, string $position) {
+        return collect($gallery)->map(function (string $path, string $device) use ($position) {
+            return [
                 'image_position' => $position,
                 'device_type' => $device,
                 'image_path' => $path,
-            ]);
-        }
-    });
+            ];
+        })->values();
+    })
+        ->values()
+        ->all();
 
+    $this->product->galleryImages()->createMany($result);
     expect(GalleryImage::count())->toEqual(9);
 });
 
 it('should create product with gallery images using helper method createByType', function () {
 
-    foreach ($this->galleries as $position => $galleryImages) {
+    // foreach ($this->galleries as $position => $galleryImages) {
+    //
+    //     $this->galleryModel->createByPosition($this->product->id, $position, $galleryImages);
+    // }
 
-        $this->galleryModel->createByPosition($this->product->id, $position, $galleryImages);
-    }
-
+    $this->galleryModel->createByPosition($this->product->id, $this->galleries);
     expect(GalleryImage::count())->toEqual(9);
 });
 
 it('should throw an exception because of unique constraints', function () {
 
-    foreach ($this->galleries as $position => $galleryImages) {
-
-        $this->galleryModel->createByPosition($this->product->id, $position, $galleryImages);
-    }
+    $this->galleryModel->createByPosition($this->product->id, $this->galleries);
 
     $this->expectException(QueryException::class);
 
-    // repeating the process to trigger the unique constraints
-    foreach ($this->galleries as $position => $galleryImages) {
-        $this->galleryModel->createByPosition($this->product->id, $position, $galleryImages);
-    }
+    $this->galleryModel->createByPosition($this->product->id, $this->galleries);
 });
 
 it('should throw an exception for the invalid enums of position column', function () {
@@ -96,9 +94,7 @@ it('should throw an exception for the invalid enums of position column', functio
 
     $this->expectException(\ValueError::class);
 
-    foreach ($invalidGallery as $position => $galleryImages) {
-        $this->galleryModel->createByPosition($this->product->id, $position, $galleryImages);
-    }
+    $this->galleryModel->createByPosition($this->product->id, $invalidGallery);
 });
 
 it('should throw an exception for the invalid enums of device type column', function () {
@@ -114,7 +110,7 @@ it('should throw an exception for the invalid enums of device type column', func
 
     $this->expectException(\ValueError::class);
 
-    foreach ($invalidGallery as $position => $galleryImages) {
-        $this->galleryModel->createByPosition($this->product->id, $position, $galleryImages);
-    }
+    $this->galleryModel->createByPosition($this->product->id, $invalidGallery);
+    var_dump(GalleryImage::count());
+
 });
