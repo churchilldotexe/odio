@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
                 'price' => $product['price'],
                 'description' => $product['description'],
                 'features' => $product['features'],
-            ]);
+            ])->createWithAllRelatedTables($product['image'], $product['categoryImage'], $product['gallery'], $product['includes']);
         });
     }
 }

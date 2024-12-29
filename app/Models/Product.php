@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ImageType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -44,16 +45,58 @@ class Product extends Model
         return $this->hasMany(ProductInclusion::class);
     }
 
-    public function createWithImages()
+    public function createWithAllRelatedTables(array $mainImages, array $categoryImages, array $galleryImages, array $productInclusions)
     {
-        // assumming that the product is itterated
-        // create the product and get the return
-        // the return id will be used to create the other table
 
-        // $this->productImages()->create($productImages);
-        // $this->productImages()->create($galleryImages);
-        // $this->productImages()->create($productInclusions);
+        $mainImagesresult = collect($mainImages)->map(function (string $image, string $deviceType) {
+            return [
+                'image_type' => ImageType::MAIN,
+                'image_path' => $image,
+                'device_type' => $deviceType,
+            ];
+
+        })->values()->all();
+
+        $categoryImagesresult = collect($categoryImages)->map(function (string $image, string $deviceType) {
+            return [
+                'image_type' => ImageType::CATEGORY,
+                'image_path' => $image,
+                'device_type' => $deviceType,
+            ];
+
+        })->values()->all();
+
+        self::productImages()->createMany([...$mainImagesresult, ...$categoryImagesresult]);
+
+        $galleryResult = collect($galleryImages)->flatMap(function (array $images, string $position) {
+
+            return collect($images)->map(function (string $imagePath, string $deviceType) use ($position) {
+                return [
+                    'image_position' => $position,
+                    'device_type' => $deviceType,
+                    'image_path' => $imagePath,
+                ];
+            })->values();
+
+        })
+            ->values()
+            ->all();
+
+        self::galleryImages()->createMany($galleryResult);
+
+        $inclusionsResult = collect($productInclusions)->map(function (array $item) {
+
+            return [
+                'item_name' => $item['item'],
+                'quantity' => $item['quantity'],
+            ];
+
+        })->all();
+
+        self::productInclusions()->createMany($inclusionsResult);
 
         return $this->load('productImages', 'galleryImages', 'productInclusions');
     }
 }
+
+// protected $fillable = ['product_id', 'item_name', 'quantity'];
