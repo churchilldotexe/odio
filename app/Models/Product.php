@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Enums\ImageType;
+use App\Services\ProductModelTransformer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -45,58 +47,70 @@ class Product extends Model
         return $this->hasMany(ProductInclusion::class);
     }
 
-    public function createWithAllRelatedTables(array $mainImages, array $categoryImages, array $galleryImages, array $productInclusions)
+    /**
+     * @param  array<string,string>  $mainImages
+     * @param  array<string,string>  $categoryImages
+     * @param  array<string,array>  $galleryImages
+     * @param  array<string,string>  $productInclusions
+     */
+    public function createWithAllRelatedTables(array $mainImages, array $categoryImages, array $galleryImages, array $productInclusions): Product
     {
 
-        $mainImagesresult = collect($mainImages)->map(function (string $image, string $deviceType) {
-            return [
-                'image_type' => ImageType::MAIN,
-                'image_path' => $image,
-                'device_type' => $deviceType,
-            ];
+        return DB::transaction(function () use ($mainImages, $categoryImages, $galleryImages, $productInclusions) {
 
-        })->values()->all();
+            try {
+                $this->createProductImages($mainImages, $categoryImages);
+                $this->createGalleryImages($galleryImages);
+                $this->createInclusions($productInclusions);
 
-        $categoryImagesresult = collect($categoryImages)->map(function (string $image, string $deviceType) {
-            return [
-                'image_type' => ImageType::CATEGORY,
-                'image_path' => $image,
-                'device_type' => $deviceType,
-            ];
+                return $this->load('productImages', 'galleryImages', 'productInclusions');
 
-        })->values()->all();
+            } catch (\Exception $e) {
+                \Log::error('Failed to create product relations:'.$e->getMessage());
+                throw $e;
+            }
+        });
 
-        self::productImages()->createMany([...$mainImagesresult, ...$categoryImagesresult]);
+    }
 
-        $galleryResult = collect($galleryImages)->flatMap(function (array $images, string $position) {
+    protected ?ProductModelTransformer $transformer = null;
 
-            return collect($images)->map(function (string $imagePath, string $deviceType) use ($position) {
-                return [
-                    'image_position' => $position,
-                    'device_type' => $deviceType,
-                    'image_path' => $imagePath,
-                ];
-            })->values();
+    protected function getTransformer(): ProductModelTransformer
+    {
+        return $this->transformer ??= new ProductModelTransformer;
+    }
 
-        })
-            ->values()
-            ->all();
+    /**
+     * @param  array<int,mixed>  $mainImages
+     * @param  array<int,mixed>  $categoryImages
+     */
+    protected function createProductImages(array $mainImages, array $categoryImages): void
+    {
+
+        $mainImagesResult = $this->getTransformer()->transformProductImages($mainImages, ImageType::MAIN);
+
+        $categoryImagesResult = $this->getTransformer()->transformProductImages($categoryImages, ImageType::CATEGORY);
+
+        self::productImages()->createMany([...$mainImagesResult, ...$categoryImagesResult]);
+    }
+
+    /**
+     * @param  array<int,mixed>  $galleryImages
+     */
+    protected function createGalleryImages(array $galleryImages): void
+    {
+
+        $galleryResult = $this->getTransformer()->transformGalleryImages($galleryImages);
 
         self::galleryImages()->createMany($galleryResult);
+    }
 
-        $inclusionsResult = collect($productInclusions)->map(function (array $item) {
-
-            return [
-                'item_name' => $item['item'],
-                'quantity' => $item['quantity'],
-            ];
-
-        })->all();
-
+    /**
+     * @param  array<int,mixed>  $productInclusions
+     */
+    protected function createInclusions(array $productInclusions): void
+    {
+        $inclusionsResult = $this->getTransformer()->transformInclusions($productInclusions);
         self::productInclusions()->createMany($inclusionsResult);
-
-        return $this->load('productImages', 'galleryImages', 'productInclusions');
     }
 }
-
-// protected $fillable = ['product_id', 'item_name', 'quantity'];
