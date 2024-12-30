@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\ProductCategory;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -13,6 +15,17 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+});
+
+Route::get('/products', function () {
+    return redirect('/');
+});
+
+Route::controller(ProductController::class)->group(function () {
+
+    Route::get('/products/{category}', 'index')->name('products');
+    Route::get('/products/{category}/{product}', 'show')->name('products.show');
+
 });
 
 Route::get('/headphone', function () {

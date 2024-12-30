@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\DeviceType;
 use App\Enums\ImageType;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,6 +15,14 @@ class ProductImage extends Model
     use HasFactory;
 
     protected $fillable = ['product_id', 'image_type', 'device_type', 'image_path'];
+
+    protected function imagePath(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => asset($value),
+            set: fn (string $value) => $value
+        );
+    }
 
     /**
      * @param  array<int,mixed>  $images

@@ -23,6 +23,10 @@ class Product extends Model
         'features',
     ];
 
+    protected $casts = [
+        'new' => 'boolean',
+    ];
+
     /**
      * @return HasMany<ProductImage,Product>
      */
