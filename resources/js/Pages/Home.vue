@@ -27,7 +27,7 @@ import MainLayout from '@/Layouts/MainLayout.vue';
                         Experience natural, lifelike audio and exceptional build quality
                         made for the passionate music enthusiast
                     </p>
-                    <ButtonLink href="/headphone" />
+                    <ButtonLink href="/products/headphones" />
                 </div>
             </section>
 

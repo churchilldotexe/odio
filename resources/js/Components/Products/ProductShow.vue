@@ -3,11 +3,11 @@ import { computed } from 'vue';
 import ButtonLink from '../ButtonLink.vue';
 import { twMerge } from 'tailwind-merge';
 import Image from '../Image.vue';
+import { ProductImages } from '@/Lib/Types/products';
+
 
 interface Props {
-    imgSrcMobile: string;
-    imgSrcTablet: string;
-    imgSrcDesktop: string;
+    imgSources: ProductImages['main'] | ProductImages['category'];
     isNew?: boolean;
     title: string;
     summary: string;
@@ -33,7 +33,8 @@ const splittedTitle = computed(() => {
     <section
         :class='[twMerge(`flex size-full max-w-screen-xl flex-col gap-8 px-6 text-center md:gap-12 md:px-10 lg:gap-30 xl:px-0 ${$attrs.class}`, reverse ? "lg:flex-row-reverse" : "lg:flex-row")]'>
 
-        <Image :img-src-mobile :img-src-tablet :img-src-desktop
+        <Image :alt="`${title} main product`" :img-src-mobile="imgSources[1].image_path"
+            :img-src-tablet="imgSources[2].image_path" :img-src-desktop="imgSources[0].image_path"
             class=" size-full rounded-lg object-cover object-center " />
 
         <div
@@ -51,7 +52,7 @@ const splittedTitle = computed(() => {
                 {{ summary }}
             </p>
             <slot>
-                <ButtonLink class="mx-auto" :href="href ?? '#'" />
+                <ButtonLink class="mx-auto" :href="href ?? '/'" />
             </slot>
         </div>
     </section>

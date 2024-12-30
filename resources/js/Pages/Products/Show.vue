@@ -7,8 +7,19 @@ import ProductArticle from '@/Components/Products/ProductArticle.vue';
 import ProductNav from '@/Components/Products/ProductNav.vue';
 import ProductShow from '@/Components/Products/ProductShow.vue';
 import MainLayout from '@/Layouts/MainLayout.vue';
+import { BaseProduct, GalleryImages, ProductImages, ProductInclusion } from '@/Lib/Types/products';
 import { ref } from 'vue';
 
+
+interface ShowProduct extends BaseProduct {
+    product_images: ProductImages;
+    gallery_images: GalleryImages
+    product_inclusions: ProductInclusion
+}
+
+const props = defineProps<{
+    product: ShowProduct
+}>()
 
 // TODO: sync with pinia
 
@@ -21,13 +32,12 @@ const orderCount = ref(1);
         <!-- TODO: go back to its parent (e.g. /earphone or history stack) -->
         <BackLink />
 
+        <pre>{{ product.product_images }}</pre>
         <div class="mx-auto grid max-w-screen-xl gap-30 pb-30 pt-6 lg:gap-40 lg:pb-40 lg:pt-14 ">
             <section class="grid gap-[5.5rem] px-6 xl:px-0">
                 <!-- TODO:  extract this make it dynamic (compound component) -->
-                <ProductShow is-new title="ZX9 SPEAKER"
-                    img-src-mobile="/assets/product-zx9-speaker/mobile/image-product.jpg"
-                    img-src-tablet="/assets/product-zx9-speaker/tablet/image-product.jpg"
-                    img-src-desktop="/assets/product-zx9-speaker/desktop/image-product.jpg"
+
+                <ProductShow is-new title="ZX9 SPEAKER" :img-sources="product.product_images['main']"
                     summary="Upgrade your sound system with the all new ZX9 active speaker. It’s a bookshelf speaker system that offers truly wireless connectivity -- creating new possibilities for more pleasing and practical audio setups."
                     class="px-0 md:grid md:grid-cols-2 md:gap-16 md:px-0 lg:gap-30 lg:px-0"
                     inner-class="text-left self-center text-left md:px-0 ">

@@ -16,9 +16,9 @@ const currentPath = usePage().url
 
 const links = [
     { path: '/', name: 'home' },
-    { path: '/headphone', name: 'headphone' },
-    { path: '/speaker', name: 'speaker' },
-    { path: '/earphone', name: 'earphone' }
+    { path: '/products/headphones', name: 'headphone' },
+    { path: '/products/speakers', name: 'speaker' },
+    { path: '/products/earphones', name: 'earphone' }
 ]
 
 </script>
@@ -28,12 +28,9 @@ const links = [
         "relative mx-auto flex max-w-screen-xl items-center justify-between gap-11 border-b border-neutral-600 px-6 py-8 ",
         "md:justify-start md:px-0 lg:justify-between",
     ]'>
-        <!-- TODO: should be checkbox -->
         <button @click="handleModalToggle" popovertarget="top-nav-bar" class="lg:hidden" aria-label="open menu">
             <BurgerIcon class="fill-current text-gray-500" />
         </button>
-
-
 
         <Link href="/" class="">
         <ApplicationLogo class="fill-current text-gray-500" />
