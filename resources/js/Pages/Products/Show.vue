@@ -14,15 +14,16 @@ import { ref } from 'vue';
 interface ShowProduct extends BaseProduct {
     product_images: ProductImages;
     gallery_images: GalleryImages
-    product_inclusions: ProductInclusion
+    product_inclusions: ProductInclusion[]
 }
 
 const props = defineProps<{
     product: ShowProduct
 }>()
 
-// TODO: sync with pinia
+const featureText = props.product.features.split('\n')
 
+// TODO: sync with pinia
 const orderCount = ref(1);
 </script>
 
@@ -32,21 +33,21 @@ const orderCount = ref(1);
         <!-- TODO: go back to its parent (e.g. /earphone or history stack) -->
         <BackLink />
 
-        <pre>{{ product.product_images }}</pre>
         <div class="mx-auto grid max-w-screen-xl gap-30 pb-30 pt-6 lg:gap-40 lg:pb-40 lg:pt-14 ">
             <section class="grid gap-[5.5rem] px-6 xl:px-0">
                 <!-- TODO:  extract this make it dynamic (compound component) -->
 
-                <ProductShow is-new title="ZX9 SPEAKER" :img-sources="product.product_images['main']"
-                    summary="Upgrade your sound system with the all new ZX9 active speaker. It’s a bookshelf speaker system that offers truly wireless connectivity -- creating new possibilities for more pleasing and practical audio setups."
+                <ProductShow :is-new="product.new" :title="product.name" :img-sources="product.product_images['main']"
+                    :summary="product.description"
                     class="px-0 md:grid md:grid-cols-2 md:gap-16 md:px-0 lg:gap-30 lg:px-0"
                     inner-class="text-left self-center text-left md:px-0 ">
 
-                    <p class="text-lg font-bold md:pb-8 md:pt-6 ">$4,500</p>
+                    <p class="text-lg font-bold md:pb-8 md:pt-6 ">$ {{ product.price }}</p>
 
                     <div class="grid grid-cols-[auto,1fr] gap-4 ">
                         <OrderCounter v-model:order-count="orderCount" />
 
+                        <!-- FIX:  will send event to add cart to pinia or something-->
                         <ButtonLink class="" href="#">Add to cart</ButtonLink>
                     </div>
                 </ProductShow>
@@ -55,54 +56,25 @@ const orderCount = ref(1);
 
                     <section class="flex flex-col gap-6 lg:gap-8">
                         <h3 class="text-2xl font-bold uppercase md:text-3xl ">Features</h3>
-                        <p class="font-medium text-black/50">
-                            Featuring a genuine leather head strap and premium earcups, these headphones deliver
-                            superior
-                            comfort for those who like to enjoy endless listening. It includes intuitive controls
-                            designed
-                            for
-                            any situation. Whether you’re taking a business call or just in your own personal space, the
-                            auto
-                            on/off and pause features ensure that you’ll never miss a beat.
-                            <br>
-                            <br>
-                            The advanced Active Noise Cancellation with built-in equalizer allow you to experience your
-                            audio
-                            world on your terms. It lets you enjoy your audio in peace, but quickly interact with your
-                            surroundings when you need to. Combined with Bluetooth 5. 0 compliant connectivity and 17
-                            hour
-                            battery life, the XX99 Mark II headphones gives you superior sound, cutting-edge technology,
-                            and
-                            a
-                            modern design aesthetic.
-                        </p>
+
+                        <div class="space-y-6 font-medium text-black/50 lg:space-y-8">
+                            <p v-for="(feature, index) in featureText" :key="`${index}${feature}`">{{ feature }}</p>
+                        </div>
                     </section>
+
 
                     <section
                         class="grid max-w-screen-sm gap-6 md:grid-cols-2 lg:grid-cols-1 lg:grid-rows-[auto,1fr] lg:gap-8">
+
                         <h3 class="text-2xl font-bold uppercase md:text-3xl">In the box</h3>
+
                         <ul class="grid auto-rows-min gap-2">
-                            <li class="flex items-center gap-6 ">
-                                <p class="font-bold text-coral ">1x</p>
-                                <p class="font-medium capitalize text-black/50">Headphone unit</p>
+                            <li v-for="inclusion in product.product_inclusions" :key="inclusion.id"
+                                class="flex items-center gap-6 ">
+                                <p class="font-bold text-coral ">{{ inclusion.quantity }}x</p>
+                                <p class="font-medium capitalize text-black/50">{{ inclusion.item_name }}</p>
                             </li>
 
-                            <li class="flex items-center gap-6 ">
-                                <p class="font-bold text-coral ">2x</p>
-                                <p class="font-medium capitalize text-black/50">Replacement Earcups</p>
-                            </li>
-                            <li class="flex items-center gap-6">
-                                <p class="font-bold text-coral ">1x</p>
-                                <p class="font-medium capitalize text-black/50">User Manual</p>
-                            </li>
-                            <li class="flex items-center gap-6">
-                                <p class="font-bold text-coral ">1x</p>
-                                <p class="font-medium capitalize text-black/50">3.5mm 5m Audio Cable</p>
-                            </li>
-                            <li class="flex items-center gap-6">
-                                <p class="font-bold text-coral ">1x</p>
-                                <p class="font-medium capitalize text-black/50">Travel Bag</p>
-                            </li>
                         </ul>
                     </section>
 
@@ -110,24 +82,27 @@ const orderCount = ref(1);
 
                 <div class="grid gap-5 md:block md:columns-2 md:space-y-5">
                     <div class="size-full break-inside-avoid">
-                        <Image img-src-mobile="/assets/product-zx9-speaker/mobile/image-gallery-1.jpg"
-                            img-src-tablet="/assets/product-zx9-speaker/tablet/image-gallery-1.jpg"
-                            img-src-desktop="/assets/product-zx9-speaker/desktop/image-gallery-1.jpg"
-                            class="size-full rounded-lg object-cover object-center " alt="closed up speaker" />
+                        <Image :img-src-mobile="product.gallery_images.first.mobile"
+                            :img-src-tablet="product.gallery_images.first.tablet"
+                            :img-src-desktop="product.gallery_images.first.desktop"
+                            :alt="`the first item for gallery view of ${product.name}`"
+                            class="size-full rounded-lg object-cover object-center " />
                     </div>
 
                     <div class="size-full break-inside-avoid">
-                        <Image img-src-mobile="/assets/product-zx9-speaker/mobile/image-gallery-2.jpg"
-                            img-src-tablet="/assets/product-zx9-speaker/tablet/image-gallery-2.jpg"
-                            img-src-desktop="/assets/product-zx9-speaker/desktop/image-gallery-2.jpg"
-                            alt="flowers books speaker" class="size-full rounded-lg object-cover object-center " />
+                        <Image :img-src-mobile="product.gallery_images.second.mobile"
+                            :img-src-tablet="product.gallery_images.second.tablet"
+                            :img-src-desktop="product.gallery_images.second.desktop"
+                            :alt="`the second item for gallery view of ${product.name}`"
+                            class="size-full rounded-lg object-cover object-center " />
                     </div>
 
                     <div class=" size-full break-inside-avoid">
-                        <Image img-src-mobile="/assets/product-zx9-speaker/mobile/image-gallery-3.jpg"
-                            img-src-tablet="/assets/product-zx9-speaker/tablet/image-gallery-3.jpg"
-                            img-src-desktop="/assets/product-zx9-speaker/desktop/image-gallery-3.jpg"
-                            class="size-full rounded-lg object-cover object-center " alt="two speakers" />
+                        <Image :img-src-mobile="product.gallery_images.third.mobile"
+                            :img-src-tablet="product.gallery_images.third.tablet"
+                            :img-src-desktop="product.gallery_images.third.desktop"
+                            :alt="`the third item for gallery view of ${product.name}`"
+                            class="size-full rounded-lg object-cover object-center " />
                     </div>
 
                 </div>

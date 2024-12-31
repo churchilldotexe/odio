@@ -3,11 +3,11 @@ import { computed } from 'vue';
 import ButtonLink from '../ButtonLink.vue';
 import { twMerge } from 'tailwind-merge';
 import Image from '../Image.vue';
-import { ProductImages } from '@/Lib/Types/products';
+import { ImageBase } from '@/Lib/Types/products';
 
 
 interface Props {
-    imgSources: ProductImages['main'] | ProductImages['category'];
+    imgSources: ImageBase
     isNew?: boolean;
     title: string;
     summary: string;
@@ -33,9 +33,8 @@ const splittedTitle = computed(() => {
     <section
         :class='[twMerge(`flex size-full max-w-screen-xl flex-col gap-8 px-6 text-center md:gap-12 md:px-10 lg:gap-30 xl:px-0 ${$attrs.class}`, reverse ? "lg:flex-row-reverse" : "lg:flex-row")]'>
 
-        <Image :alt="`${title} main product`" :img-src-mobile="imgSources[1].image_path"
-            :img-src-tablet="imgSources[2].image_path" :img-src-desktop="imgSources[0].image_path"
-            class=" size-full rounded-lg object-cover object-center " />
+        <Image :alt="`${title} main product`" :img-src-mobile="imgSources.mobile" :img-src-tablet="imgSources.tablet"
+            :img-src-desktop="imgSources.desktop" class=" size-full rounded-lg object-cover object-center " />
 
         <div
             :class="[twMerge(`flex flex-col gap-6 md:gap-4 md:px-14 lg:items-start lg:self-center lg:px-0 lg:text-left ${innerClass}`)]">
