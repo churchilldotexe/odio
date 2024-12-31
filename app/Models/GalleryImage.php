@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\DeviceType;
 use App\Enums\ImagePosition;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,6 +15,14 @@ class GalleryImage extends Model
     use HasFactory;
 
     protected $fillable = ['product_id', 'image_position', 'device_type', 'image_path'];
+
+    protected function imagePath(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => asset($value),
+            set: fn ($value) => $value
+        );
+    }
 
     protected function casts(): array
     {

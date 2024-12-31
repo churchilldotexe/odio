@@ -117,4 +117,5 @@ class Product extends Model
         $inclusionsResult = $this->getTransformer()->transformInclusions($productInclusions);
         self::productInclusions()->createMany($inclusionsResult);
     }
+
 }
