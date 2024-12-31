@@ -6,6 +6,7 @@ use App\Enums\ProductCategory;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
+use App\Services\ProductControllerService;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -29,7 +30,7 @@ class ProductController extends Controller
 
             $productArray = $product->toArray();
 
-            $productArray['product_images'] = collect($productArray['product_images'])->groupBy('image_type');
+            $productArray['product_images'] = ProductControllerService::groupRelatedProducts(collect($product->productImages), 'image_type');
 
             return $productArray;
         })->sortByDesc('new')->values(),
@@ -64,9 +65,14 @@ class ProductController extends Controller
         }
 
         $loadedProduct = $product->load(['galleryImages', 'productImages', 'productInclusions']);
-        dd($loadedProduct);
 
-        return Inertia::render('Products/Show', ['product' => $product]);
+        $transformedImage = [
+            ...$loadedProduct->toArray(),
+            'product_images' => ProductControllerService::groupRelatedProducts($product->productImages, 'image_type'),
+            'gallery_images' => ProductControllerService::groupRelatedProducts($product->galleryImages, 'image_position'),
+        ];
+
+        return Inertia::render('Products/Show', ['product' => $transformedImage]);
     }
 
     /**
