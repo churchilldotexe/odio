@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 
 defineProps<{
     label: string
-    value: string
+    value: number
     valueClass?: string
 }>()
 

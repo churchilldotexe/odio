@@ -6,27 +6,18 @@ import ButtonLink from '../ButtonLink.vue';
 import OrderedOverview from '@/Components/Order/OrderOverview.vue';
 import SummaryRow from './SummaryRow.vue';
 import NavModal from '../Nav/NavModal.vue';
+import { useCartStore } from '@/Stores/cart';
 
+const cartStore = useCartStore();
 
 const { isModalOpen, handleModalToggle } = inject(cartModal) as {
     isModalOpen: Ref<boolean, boolean>;
     handleModalToggle: () => void;
 }
 
+const updateCartItem = ({ id, quantity }: { id: number, quantity: number }) => { cartStore.updateCartItem(id, quantity) }
 
 </script>
-
-<!-- TODO:
-    - [x] do a section instead of details and the logic is using v-show(to persist the state) & transition
-    - [x] for backdrop: teleport it in the main layouts (div) and set the z-index lower than TheHeader but higher than everybody else
-    - [] for closing the modal attach the following:
-        - [x] esc keydown that will trigger closing when modal is ON
-        - [x] clicking outside the modal will close the modal (vshow-off to preserve state)
-        - [x] clicking checkout will redirect to checkout page and close the modal
-    - [x] will disable the hide nav on scroll when modal is open
--->
-
-
 
 <template>
 
@@ -39,12 +30,14 @@ const { isModalOpen, handleModalToggle } = inject(cartModal) as {
         <section id="cart-modal" v-show="isModalOpen"
             class="absolute right-0 top-full m-7 grid max-w-md gap-8 rounded-lg bg-white px-7 py-8 md:mr-0">
             <div class="flex items-center justify-between gap-4 ">
-                <h2 class="text-lg font-bold uppercase">Cart (3)</h2>
-                <button class="font-medium text-black/50 underline">Remove all</button>
+                <h2 class="text-lg font-bold uppercase">Cart ({{ cartStore.cart.length }})</h2>
+                <button @click="cartStore.clearCart" class="font-medium text-black/50 underline">Remove all</button>
             </div>
 
-            <OrderedOverview />
-            <SummaryRow label="TOTAL" value="5,396" />
+            <OrderedOverview v-for="item in cartStore.cart" :key="item.id" :item-name="item.name"
+                :item-quantity="item.quantity" :item-price="item.price" :item-img-url="item.imgUrl" :item-id="item.id"
+                :update-quantity="updateCartItem" />
+            <SummaryRow label="TOTAL" :value="cartStore.initialTotal" />
             <ButtonLink href="/checkout" class="w-full text-center text-sm">Checkout</ButtonLink>
         </section>
     </NavModal>

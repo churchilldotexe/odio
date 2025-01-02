@@ -13,6 +13,7 @@ const decrement = () => {
     }
 }
 </script>
+
 <template>
     <div class="grid h-full w-fit max-w-32 grid-cols-[.75fr,1fr,.75fr] ">
         <button
