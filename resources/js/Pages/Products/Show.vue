@@ -8,6 +8,7 @@ import ProductNav from '@/Components/Products/ProductNav.vue';
 import ProductShow from '@/Components/Products/ProductShow.vue';
 import MainLayout from '@/Layouts/MainLayout.vue';
 import { BaseProduct, GalleryImages, ProductImages, ProductInclusion } from '@/Lib/Types/products';
+import { useCartStore } from '@/Stores/cart';
 import { ref } from 'vue';
 
 
@@ -21,10 +22,23 @@ const props = defineProps<{
     product: ShowProduct
 }>()
 
+const cartStore = useCartStore()
+
 const featureText = props.product.features.split('\n')
 
-// TODO: sync with pinia
 const orderCount = ref(1);
+
+const addToCart = () => {
+    cartStore.addToCart({
+        id: props.product.id,
+        name: props.product.name,
+        price: props.product.price,
+        quantity: orderCount.value,
+        imgUrl: props.product.product_images.category.mobile
+    })
+
+    orderCount.value = 1
+}
 </script>
 
 <template>
@@ -48,7 +62,9 @@ const orderCount = ref(1);
                         <OrderCounter v-model:order-count="orderCount" />
 
                         <!-- FIX:  will send event to add cart to pinia or something-->
-                        <ButtonLink class="" href="#">Add to cart</ButtonLink>
+                        <button @click="addToCart"
+                            class=" w-fit bg-coral px-8 py-4 text-xs font-bold uppercase text-white transition-colors duration-300 hocus-visible:bg-coral-light lg:ml-0">Add
+                            to Cart</button>
                     </div>
                 </ProductShow>
 
