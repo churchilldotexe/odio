@@ -42,9 +42,7 @@ const addToCart = () => {
 </script>
 
 <template>
-    <!-- TODO: change this make this dynamic (earphone) -->
-    <MainLayout title="earphone Details">
-        <!-- TODO: go back to its parent (e.g. /earphone or history stack) -->
+    <MainLayout :title="`${product.name} Details`">
         <BackLink />
 
         <div class="mx-auto grid max-w-screen-xl gap-30 pb-30 pt-6 lg:gap-40 lg:pb-40 lg:pt-14 ">
@@ -61,7 +59,6 @@ const addToCart = () => {
                     <div class="grid grid-cols-[auto,1fr] gap-4 ">
                         <OrderCounter v-model:order-count="orderCount" />
 
-                        <!-- FIX:  will send event to add cart to pinia or something-->
                         <button @click="addToCart"
                             class=" w-fit bg-coral px-8 py-4 text-xs font-bold uppercase text-white transition-colors duration-300 hocus-visible:bg-coral-light lg:ml-0">Add
                             to Cart</button>

@@ -21,9 +21,12 @@ const updateCartItem = ({ id, quantity }: { id: number, quantity: number }) => {
 
 <template>
 
-    <button @click="handleModalToggle" aria-label="open cart" class="md:ml-auto lg:ml-0">
-        <CartIcon class="fill-current text-gray-500 hocus-visible:stroke-coral "
+    <button @click="handleModalToggle" aria-label="open cart" class="relative md:ml-auto lg:ml-0">
+        <CartIcon class="fill-current text-gray-500  hocus-visible:stroke-coral"
             :class="[isModalOpen ? 'stroke-coral' : '']" />
+        <span v-if="cartStore.cart.length > 0"
+            class="absolute right-1/2 top-1/2 grid size-5 place-items-center rounded-full bg-coral text-xs font-bold ">{{
+                cartStore.cart.length }}</span>
     </button>
 
     <NavModal v-model:toggle-modal="isModalOpen">
@@ -34,8 +37,7 @@ const updateCartItem = ({ id, quantity }: { id: number, quantity: number }) => {
                 <button @click="cartStore.clearCart" class="font-medium text-black/50 underline">Remove all</button>
             </div>
 
-            <OrderedOverview v-for="item in cartStore.cart" :key="item.id" :item-name="item.name"
-                :item-quantity="item.quantity" :item-price="item.price" :item-img-url="item.imgUrl" :item-id="item.id"
+            <OrderedOverview v-for="item in cartStore.cart" :key="item.id" :item="item"
                 :update-quantity="updateCartItem" />
             <SummaryRow label="TOTAL" :value="cartStore.initialTotal" />
             <ButtonLink href="/checkout" class="w-full text-center text-sm">Checkout</ButtonLink>

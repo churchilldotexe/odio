@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { computed, reactive } from 'vue';
 
-interface Cart {
+export interface Cart {
     id: number;
     name: string;
     imgUrl: string;
@@ -13,24 +13,38 @@ export const useCartStore = defineStore('cart', () => {
     const cart = reactive<Cart[]>([]);
 
     const addToCart = (item: Cart) => {
-        const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+        const existingItemIndex = cart.findIndex(
+            (cartItem) => cartItem.id === item.id
+        );
 
-        if (existingItem) {
-            item.quantity += item.quantity;
+        if (existingItemIndex !== -1) {
+            cart.splice(existingItemIndex, 1, {
+                ...cart[existingItemIndex],
+                quantity: cart[existingItemIndex].quantity + item.quantity,
+            });
+            console.log('updatedCart', cart); //this logs the latest update meaning it is working
         } else {
             cart.push({ ...item });
         }
     };
 
     const updateCartItem = (itemId: number, quantity: number) => {
-        const existingItem = cart.findIndex((cartItem) => cartItem.id === itemId);
+        const existingItemIndex = cart.findIndex(
+            (cartItem) => cartItem.id === itemId
+        );
 
-        if (existingItem !== -1) {
-            cart[existingItem] = {
-                ...cart[existingItem],
-                quantity,
+        if (existingItemIndex !== -1) {
+            const newQuantity = cart[existingItemIndex].quantity + quantity;
+
+            cart[existingItemIndex] = {
+                ...cart[existingItemIndex],
+                quantity: newQuantity,
             };
+
+            return newQuantity;
         }
+
+        return quantity;
     };
 
     const deleteCartItem = (id: number) => {
