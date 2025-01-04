@@ -17,11 +17,12 @@ namespace App\Models{
  *
  * @property int $id
  * @property int $product_id
- * @property string $order
- * @property string $device_type
- * @property string $url
+ * @property \App\Enums\ImagePosition $image_position
+ * @property \App\Enums\DeviceType $device_type
+ * @property string $image_path
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Product $product
  * @method static \Database\Factories\GalleryImageFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GalleryImage newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GalleryImage newQuery()
@@ -29,10 +30,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GalleryImage whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GalleryImage whereDeviceType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GalleryImage whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|GalleryImage whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GalleryImage whereImagePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GalleryImage whereImagePosition($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GalleryImage whereProductId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GalleryImage whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|GalleryImage whereUrl($value)
  */
 	class GalleryImage extends \Eloquent {}
 }
@@ -44,12 +45,18 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property string $category
- * @property int $new
+ * @property bool $new
  * @property string $price
  * @property string $description
  * @property string $features
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\GalleryImage> $galleryImages
+ * @property-read int|null $gallery_images_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductImage> $productImages
+ * @property-read int|null $product_images_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductInclusion> $productInclusions
+ * @property-read int|null $product_inclusions_count
  * @method static \Database\Factories\ProductFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product newQuery()
@@ -73,11 +80,12 @@ namespace App\Models{
  *
  * @property int $id
  * @property int $product_id
- * @property string $image_type
- * @property string $device_type
- * @property string $url
+ * @property \App\Enums\ImageType $image_type
+ * @property \App\Enums\DeviceType $device_type
+ * @property string $image_path
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Product $product
  * @method static \Database\Factories\ProductImageFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductImage newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductImage newQuery()
@@ -85,10 +93,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductImage whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductImage whereDeviceType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductImage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductImage whereImagePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductImage whereImageType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductImage whereProductId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductImage whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductImage whereUrl($value)
  */
 	class ProductImage extends \Eloquent {}
 }
@@ -100,9 +108,10 @@ namespace App\Models{
  * @property int $id
  * @property int $product_id
  * @property string $item_name
- * @property string $quantity
+ * @property int $quantity
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Product $product
  * @method static \Database\Factories\ProductInclusionFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductInclusion newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductInclusion newQuery()

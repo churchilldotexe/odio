@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -27,8 +28,9 @@ Route::controller(ProductController::class)->group(function () {
 
 });
 
-Route::get('/checkout', function () {
-    return Inertia::render('Checkout');
+Route::controller(CheckoutController::class)->group(function () {
+    Route::get('/checkout', 'create');
+    Route::post('/checkout', 'store');
 });
 
 Route::get('/dashboard', function () {
