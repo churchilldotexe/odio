@@ -1,16 +1,45 @@
 <script setup lang="ts">
 import BackLink from '@/Components/BackLink.vue';
-import OrderedOverview from '@/Components/Order/OrderOverview.vue';
 import Input from '@/Components/Order/Input.vue';
 import MainLayout from '@/Layouts/MainLayout.vue';
-import { ref } from 'vue';
 import SummaryRow from '@/Components/Order/SummaryRow.vue';
-import ButtonLink from '@/Components/ButtonLink.vue';
 import CODIcon from '@/Components/Order/CODIcon.vue';
 import OrderConfirmation from '@/Components/Order/OrderConfirmation.vue';
+import OrderOverview from '@/Components/Order/OrderOverview.vue';
+import { useCartStore } from '@/Stores/cart';
+import { useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
-const email = ref<string>('')
+const cartStore = useCartStore()
+
+type Form = {
+    name: string | null
+    email: string | null
+    phone: number | null
+    address: string | null
+    zipCode: number | null
+    city: string | null
+    country: string | null
+    paymentMethod: 'e-money' | 'cod'
+    eNumber: number | null
+    ePin: number | null
+}
+
+const form = useForm<Form>({
+    name: null,
+    phone: null,
+    email: null,
+    country: null,
+    city: null,
+    address: null,
+    zipCode: null,
+    paymentMethod: 'e-money',
+    eNumber: null,
+    ePin: null,
+})
+
 const showConfirmation = ref(false)
+
 </script>
 
 <template>
@@ -25,13 +54,12 @@ const showConfirmation = ref(false)
 
                     <div class="grid gap-6 md:grid-cols-2 md:gap-x-4">
 
-                        <!-- FIX: do something with the v-model , remove the required if not really needed -->
-                        <Input name="name" type="name" v-model:model-value="email" placeholder="Alexie Ward"
+                        <Input name="name" type="name" v-model:model-value="form.name" placeholder="Alexie Ward"
                             label="name" />
-                        <Input name="email" type="email" v-model:model-value="email" placeholder="alexia@email.com"
+                        <Input name="email" type="email" v-model:model-value="form.email" placeholder="alexia@email.com"
                             label="email address" />
 
-                        <Input name="phone" type="phone" v-model:model-value.number="email"
+                        <Input name="phone" type="phone" v-model:model-value.number="form.phone"
                             placeholder="+1 202-555-0136" label="Phone number" />
                     </div>
                 </fieldset>
@@ -41,17 +69,18 @@ const showConfirmation = ref(false)
 
                     <div class="grid gap-6 md:grid-cols-2 md:gap-x-4">
 
-                        <!-- FIX: do something with the v-model , remove the required if not really needed -->
-                        <Input class="md:col-span-2" name="address" type="text" v-model:model-value="email"
+                        <Input class="md:col-span-2" name="address" type="text" v-model:model-value="form.address"
                             placeholder="1137 williams avenue" label="Your address" />
-                        <Input name="zip-code" type="number" v-model:model-value="email" placeholder="10001"
-                            label="ZIP code" />
 
-                        <Input name="city" type="text" v-model:model-value.number="email" placeholder="New York"
+                        <Input name="zip-code" type="number" v-model:model-value.number="form.zipCode"
+                            placeholder="10001" label="ZIP code" />
+
+                        <Input name="city" type="text" v-model:model-value="form.city" placeholder="New York"
                             label="City" />
 
-                        <Input name="country" type="text" v-model:model-value.number="email" placeholder="United States"
+                        <Input name="country" type="text" v-model:model-value="form.country" placeholder="United States"
                             label="Country" />
+
                     </div>
                 </fieldset>
 
@@ -59,13 +88,12 @@ const showConfirmation = ref(false)
                     <legend class="pb-4 text-sm font-bold uppercase text-coral">Payment Details</legend>
 
                     <div class="grid gap-6 md:grid-cols-2">
-                        <!-- TODO: do this two options radio button-->
                         <div class="grid gap-4 md:col-span-2 md:grid-cols-2 ">
                             <p class="text-xs font-bold capitalize">payment method</p>
                             <label for="e-money"
                                 class="relative flex cursor-pointer items-center gap-2 rounded-lg border border-[#cfcfcf] p-4 hocus-visible:border-coral">
                                 <input id="e-money" name="payment-method" class="peer/emoney hidden" value="e-money"
-                                    type="radio" />
+                                    v-model="form.paymentMethod" type="radio" />
                                 <div
                                     :class="[
                                         ' grid size-5 cursor-pointer place-items-center rounded-full border border-[#cfcfcf] bg-transparent ',
@@ -75,11 +103,10 @@ const showConfirmation = ref(false)
                                 <span class="text-xs font-bold capitalize ">Payment Method</span>
                             </label>
 
-                            <!-- FIX: make this controlled input using v-model in order to change the border color as per design feature -->
                             <label for="cod"
                                 class="relative flex cursor-pointer items-center gap-2 rounded-lg border border-[#cfcfcf] p-4 peer-checked/cod:border-coral  hocus-visible:border-coral md:col-start-2 md:col-end-2">
-                                <input id="cod" name="payment-method" class="peer/cod hidden" value="e-money"
-                                    type="radio" />
+                                <input id="cod" name="payment-method" class="peer/cod hidden" value="cod"
+                                    v-model="form.paymentMethod" type="radio" />
                                 <div
                                     :class="[
                                         ' grid size-5 cursor-pointer place-items-center rounded-full border border-[#cfcfcf] bg-transparent ',
@@ -90,42 +117,43 @@ const showConfirmation = ref(false)
                             </label>
                         </div>
 
-                        <div class="grid grid-cols-[auto,1fr] gap-8 peer-checked/cod:block md:col-span-2">
+                        <div v-if="form.paymentMethod === 'cod'" class="grid grid-cols-[auto,1fr] gap-8 md:col-span-2">
                             <CODIcon class="place-self-center" />
                             <p class="font-medium text-black/50">The ‘Cash on Delivery’ option enables you to pay in
                                 cash when our delivery courier
                                 arrives at your residence. Just make sure your address is correct so that your order
                                 will not be cancelled.</p>
                         </div>
-                        <!-- FIX: do something with the v-model , remove the required if not really needed -->
-                        <div class="hidden peer-checked/emoney:contents">
-                            <Input name="e-number" type="number" v-model:model-value="email" placeholder="238521993"
-                                label="e-Money Number" label-class="normal-case" />
 
-                            <Input name="e-ping" type="number" v-model:model-value="email" placeholder="6891"
+                        <div v-else class="contents">
+                            <Input name="e-number" type="number" v-model:model-value="form.eNumber"
+                                placeholder="238521993" label="e-Money Number" label-class="normal-case" />
+
+                            <Input name="e-pin" type="number" v-model:model-value="form.ePin" placeholder="6891"
                                 label="e-Money Pin" label-class="normal-case" />
                         </div>
                     </div>
                 </fieldset>
             </section>
 
-            <section class=" grid gap-8 rounded-lg bg-white p-6 md:p-8 lg:place-self-start">
+
+            <section class=" grid gap-8 rounded-lg bg-white p-6 md:p-8 lg:place-self-start"
+                v-if="cartStore.cart.length > 0">
+
                 <h2 class="text-lg font-bold uppercase">Summary</h2>
-                <!-- TODO: will map/iterate base on the order (use pinia for sync) -->
                 <div class="grid gap-6">
-                    <OrderedOverview>
-                        <p class=" self-start justify-self-end pt-2 font-bold text-black/50">x1</p>
-                    </OrderedOverview>
-                    <OrderedOverview>
-                        <p class=" self-start justify-self-end pt-2 font-bold text-black/50">x1</p>
-                    </OrderedOverview>
+
+                    <OrderOverview v-for="item in cartStore.cart" :key="item.id" :item="item">
+                        <p class=" self-start justify-self-end pt-2 font-bold text-black/50">x{{ item.quantity }}</p>
+                    </OrderOverview>
+
                 </div>
 
                 <div>
-                    <SummaryRow label="total" value="5,396" />
-                    <SummaryRow label="shipping" value="50" />
-                    <SummaryRow label="vat(included)" value="1,079" />
-                    <SummaryRow class="pt-6" label="grand total" value="5,446" value-class="text-coral" />
+                    <SummaryRow label="total" :value="5396" />
+                    <SummaryRow label="shipping" :value="50" />
+                    <SummaryRow label="vat(included)" :value="1079" />
+                    <SummaryRow class="pt-6" label="grand total" :value="5446" value-class="text-coral" />
                 </div>
 
                 <!-- TODO: this will popout the thank you component -->

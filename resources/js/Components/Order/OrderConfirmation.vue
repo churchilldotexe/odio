@@ -3,6 +3,10 @@ import { ref, watch } from 'vue';
 import CheckIcon from './CheckIcon.vue';
 import OrderOverview from './OrderOverview.vue';
 import ButtonLink from '../ButtonLink.vue';
+import { useCartStore } from '@/Stores/cart';
+import { transformToCurrency } from '@/Lib/utils/currency';
+
+const cartStore = useCartStore()
 
 const { showModal = false } = defineProps<{
     showModal: boolean
@@ -41,16 +45,22 @@ watch(() => showModal, (modal) => {
                 </div>
                 <div class="grid md:grid-cols-[1fr,1fr]">
                     <div class="grid gap-6 rounded-t-lg bg-[#f1f1f1] p-6 md:w-max ">
-                        <OrderOverview class="place-self-center ">
+                        <OrderOverview :item="cartStore.cart[0]" class="place-self-center ">
                             <p class=" self-start justify-self-end pt-2 font-bold text-black/50">x1</p>
                         </OrderOverview>
-                        <hr class="border border-black/[0.08]" />
-                        <p class="text-center text-xs font-bold text-black/50">and 2 other item(s)</p>
+
+                        <template v-if="cartStore.cart.length > 1">
+                            <hr class="border border-black/[0.08]" />
+                            <p class="text-center text-xs font-bold text-black/50">and {{ cartStore.cart.length - 1 }}
+                                other
+                                item(s)</p>
+                        </template>
                     </div>
+
                     <div
                         class="grid gap-2 rounded-b-lg bg-black p-6 md:w-full md:rounded-r-lg md:rounded-bl-none md:py-10">
                         <p class="font-medium uppercase text-white/50 md:self-end">grand total</p>
-                        <p class="text-lg font-bold text-white ">$ 5,446</p>
+                        <p class="text-lg font-bold text-white ">{{ transformToCurrency(cartStore.finalTotal) }}</p>
                     </div>
 
                 </div>
