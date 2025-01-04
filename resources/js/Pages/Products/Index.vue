@@ -10,11 +10,10 @@ interface IndexProduct extends BaseProduct {
     product_images: ProductImages;
 }
 
-const props = defineProps<{
+defineProps<{
     products: IndexProduct[]
 }>()
 
-console.log(props.products)
 
 </script>
 
