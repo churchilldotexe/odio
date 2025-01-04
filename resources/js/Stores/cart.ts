@@ -59,6 +59,10 @@ export const useCartStore = defineStore('cart', () => {
         cart.length = 0;
     };
 
+    const isCartEmpty = computed(() => {
+        return cart.length > 0;
+    });
+
     const initialTotal = computed(() => {
         return cart.reduce((total, item) => total + item.price * item.quantity, 0);
     });
@@ -79,5 +83,6 @@ export const useCartStore = defineStore('cart', () => {
         initialTotal,
         finalTotal,
         clearCart,
+        isCartEmpty,
     };
 });
