@@ -25,7 +25,7 @@ const updateCartItem = ({ id, quantity }: { id: number, quantity: number }) => {
         <CartIcon class="fill-current text-gray-500  hocus-visible:stroke-coral"
             :class="[isModalOpen ? 'stroke-coral' : '']" />
         <span v-if="cartStore.cart.length > 0"
-            class="absolute right-1/2 top-1/2 grid size-5 place-items-center rounded-full bg-coral text-xs font-bold ">{{
+            class="absolute right-1/2 top-1/2 grid size-5 place-items-center rounded-full bg-coral text-xs font-bold text-white ">{{
                 cartStore.cart.length }}</span>
     </button>
 

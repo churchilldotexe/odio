@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { onUnmounted, ref, watch } from 'vue';
 import CheckIcon from './CheckIcon.vue';
 import OrderOverview from './OrderOverview.vue';
 import ButtonLink from '../ButtonLink.vue';
@@ -24,6 +24,12 @@ watch(() => showModal, (modal) => {
     return modal ? dialogRef.value?.showModal() : setTimeout(() => { dialogRef.value?.close() }, 200)
 })
 
+
+// order is already confirm
+onUnmounted(() => {
+    cartStore.clearCart()
+})
+
 </script>
 
 <template>
@@ -43,8 +49,8 @@ watch(() => showModal, (modal) => {
                     </h3>
                     <p class="font-medium text-black/50">You will receive an email confirmation shortly.</p>
                 </div>
-                <div class="grid md:grid-cols-[1fr,1fr]">
-                    <div class="grid gap-6 rounded-t-lg bg-[#f1f1f1] p-6 md:w-max ">
+                <div class="grid md:grid-cols-[1fr,.8fr]">
+                    <div class="grid gap-6 rounded-t-lg bg-[#f1f1f1] p-6 md:w-full ">
                         <OrderOverview :item="cartStore.cart[0]" class="place-self-center ">
                             <p class=" self-start justify-self-end pt-2 font-bold text-black/50">x1</p>
                         </OrderOverview>
@@ -64,7 +70,8 @@ watch(() => showModal, (modal) => {
                     </div>
 
                 </div>
-                <ButtonLink class="mt-3 h-fit w-full text-center" href="/">back to home</ButtonLink>
+                <ButtonLink class="mt-3 h-fit w-full text-center" href="/">back to home
+                </ButtonLink>
             </section>
         </dialog>
 
