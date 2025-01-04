@@ -32,15 +32,23 @@ const updateCartItem = ({ id, quantity }: { id: number, quantity: number }) => {
     <NavModal v-model:toggle-modal="isModalOpen">
         <section id="cart-modal" v-show="isModalOpen"
             class="absolute right-0 top-full m-7 grid max-w-md gap-8 rounded-lg bg-white px-7 py-8 md:mr-0">
-            <div class="flex items-center justify-between gap-4 ">
-                <h2 class="text-lg font-bold uppercase">Cart ({{ cartStore.cart.length }})</h2>
-                <button @click="cartStore.clearCart" class="font-medium text-black/50 underline">Remove all</button>
+            <div v-if="cartStore.isCartEmpty" class="contents">
+
+                <div class="flex items-center justify-between gap-4 ">
+                    <h2 class="text-lg font-bold uppercase">Cart ({{ cartStore.cart.length }})</h2>
+                    <button @click="cartStore.clearCart" class="font-medium text-black/50 underline">Remove all</button>
+                </div>
+
+                <OrderedOverview v-for="item in cartStore.cart" :key="item.id" :item="item"
+                    :update-quantity="updateCartItem" />
+                <SummaryRow label="TOTAL" :value="cartStore.initialTotal" />
+                <ButtonLink href="/checkout" class="w-full text-center text-sm">Checkout</ButtonLink>
+
             </div>
 
-            <OrderedOverview v-for="item in cartStore.cart" :key="item.id" :item="item"
-                :update-quantity="updateCartItem" />
-            <SummaryRow label="TOTAL" :value="cartStore.initialTotal" />
-            <ButtonLink href="/checkout" class="w-full text-center text-sm">Checkout</ButtonLink>
+            <div v-else>
+                <h2 class="text-lg font-bold uppercase">Cart Empty</h2>
+            </div>
         </section>
     </NavModal>
 
