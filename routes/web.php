@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\ProductCategory;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -26,23 +25,6 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('/products/{category}', 'index')->name('products');
     Route::get('/products/{category}/{product}', 'show')->name('products.show');
 
-});
-
-Route::get('/headphone', function () {
-    return Inertia::render('HeadPhone');
-});
-
-Route::get('/speaker', function () {
-    return Inertia::render('Speaker');
-});
-
-Route::get('/earphone', function () {
-    return Inertia::render('EarPhone');
-});
-
-// placeholder for show
-Route::get('/foo', function () {
-    return Inertia::render('Details');
 });
 
 Route::get('/checkout', function () {
