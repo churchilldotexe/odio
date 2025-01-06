@@ -14,23 +14,35 @@ interface Session {
     cart: Cart[];
 }
 
-// const sessionSyncTimeout: ReturnType<typeof setTimeout> | null = null;
+let sessionSyncTimeout: ReturnType<typeof setTimeout> | null = null;
 
 export const useCartStore = defineStore('cart', () => {
     const cart = reactive<Cart[]>([]);
+    const prevCart = reactive<Cart[]>([]);
 
-    watch(
+    const cloneCart = (cartValue: Cart[]) => {
+        return prevCart.splice(0, 1, ...cartValue);
+    };
+
+    const { pause: cartWatchPause, resume: cartWatchResume } = watch(
         cart,
-        (newCart, oldCart) => {
-            router.post(
-                '/cart',
-                { cart: newCart },
-                {
-                    onError: () => cart.splice(0, 1, ...oldCart),
-                    preserveState: true,
-                    preserveScroll: true,
-                }
-            );
+        (newCart) => {
+            if (sessionSyncTimeout) {
+                clearTimeout(sessionSyncTimeout);
+            }
+
+            sessionSyncTimeout = setTimeout(() => {
+                router.post(
+                    '/cart',
+                    { cart: newCart },
+                    {
+                        // undo the cart
+                        onError: () => cart.splice(0, 1, ...prevCart),
+                        preserveState: true,
+                        preserveScroll: true,
+                    }
+                );
+            }, 500);
         },
         { deep: true }
     );
@@ -40,13 +52,18 @@ export const useCartStore = defineStore('cart', () => {
         const laravelSession = page.props.session as Session;
 
         if (laravelSession.cart?.length > 0) {
+            cartWatchPause();
+
             cart.length = 0;
             laravelSession.cart.forEach((sessCart) => cart.push(sessCart));
+
+            cartWatchResume();
         }
     });
 
     const addToCart = (item: Cart) => {
-        const oldCart = cart;
+        const oldCart = cloneCart(cart);
+
         const existingItemIndex = cart.findIndex(
             (cartItem) => cartItem.id === item.id
         );
@@ -68,6 +85,8 @@ export const useCartStore = defineStore('cart', () => {
     };
 
     const updateCartItem = (itemId: number, quantity: number) => {
+        cloneCart(cart);
+
         const existingItemIndex = cart.findIndex(
             (cartItem) => cartItem.id === itemId
         );
@@ -87,6 +106,7 @@ export const useCartStore = defineStore('cart', () => {
     };
 
     const deleteCartItem = (id: number) => {
+        cloneCart(cart);
         const cartIndex = cart.findIndex((cartItem) => cartItem.id === id);
 
         if (cartIndex !== -1) {
@@ -96,7 +116,7 @@ export const useCartStore = defineStore('cart', () => {
 
     const clearCart = () => {
         cart.length = 0;
-        router.delete('/cart');
+        router.delete('/cart', { onError: () => cart.splice(0, 1, ...prevCart) });
     };
 
     const isCartEmpty = computed(() => {
