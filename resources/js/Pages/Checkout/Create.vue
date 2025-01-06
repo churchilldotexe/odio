@@ -47,8 +47,6 @@ const submit = () => {
             showConfirmation.value = true
         }
     })
-
-
 }
 
 

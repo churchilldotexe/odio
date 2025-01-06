@@ -9,6 +9,7 @@ import ProductShow from '@/Components/Products/ProductShow.vue';
 import MainLayout from '@/Layouts/MainLayout.vue';
 import { BaseProduct, GalleryImages, ProductImages, ProductInclusion } from '@/Lib/Types/products';
 import { useCartStore } from '@/Stores/cart';
+import { router, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 
@@ -29,14 +30,15 @@ const featureText = props.product.features.split('\n')
 const orderCount = ref(1);
 
 const addToCart = () => {
-    cartStore.addToCart({
+    const cartItems = {
         id: props.product.id,
         name: props.product.name,
         price: props.product.price,
         quantity: orderCount.value,
         imgUrl: props.product.product_images.category.mobile
-    })
+    }
 
+    cartStore.addToCart(cartItems)
     orderCount.value = 1
 }
 </script>
