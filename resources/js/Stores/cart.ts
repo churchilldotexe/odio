@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia';
-import { computed, reactive } from 'vue';
+import { computed, onMounted, reactive, watch } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+import axios, { AxiosError } from 'axios';
 
 export interface Cart {
   id: number;
@@ -9,8 +11,58 @@ export interface Cart {
   price: number;
 }
 
+interface Session {
+  cart: Cart[] | null;
+}
+
+let sessionSyncTimeout: ReturnType<typeof setTimeout> | null = null;
+
 export const useCartStore = defineStore('cart', () => {
   const cart = reactive<Cart[]>([]);
+
+  const syncCartWithSession = (cartData: Cart[]) => {
+    if (sessionSyncTimeout) clearTimeout(sessionSyncTimeout);
+
+    sessionSyncTimeout = setTimeout(async () => {
+      try {
+        await axios.post('/cart', { cart: cartData });
+      } catch (error) {
+        const axiosError = error as AxiosError;
+
+        if (axiosError.response) {
+          console.error('Server error:', {
+            status: axiosError.response.status,
+            data: axiosError.response.data,
+            message: axiosError.message,
+          });
+        } else if (axiosError.request) {
+          console.error('No response received', axiosError.request);
+        } else {
+          console.error('Request setup error', (error as Error).message);
+        }
+      }
+    }, 500);
+  };
+
+  watch(
+    cart,
+    (newCart) => {
+      syncCartWithSession(newCart); // NOTE: might need to spread
+    },
+    { deep: true }
+  );
+
+  onMounted(() => {
+    const page = usePage();
+    const laravelSession = page.props.session as Session;
+
+    if (laravelSession.cart) {
+      console.log('syncing with session');
+      cart.length = 0;
+      laravelSession.cart.forEach((sessCart) => cart.push(sessCart));
+    }
+    console.log('no session ');
+  });
 
   const addToCart = (item: Cart) => {
     const existingItemIndex = cart.findIndex(
@@ -56,6 +108,11 @@ export const useCartStore = defineStore('cart', () => {
 
   const clearCart = () => {
     cart.length = 0;
+    try {
+      axios.delete('/api/cart');
+    } catch (error) {
+      console.error('unable to delete cart session', error);
+    }
   };
 
   const isCartEmpty = computed(() => {
