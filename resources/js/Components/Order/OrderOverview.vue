@@ -7,6 +7,7 @@ import { transformToCurrency } from '@/Lib/utils/currency';
 const props = defineProps<{
     item: Cart
     updateQuantity?: ({ id, quantity }: { id: number, quantity: number }) => void
+    deleteItem?: (id: number) => void
 }>()
 
 const orderCount = computed({
@@ -19,6 +20,14 @@ const orderCount = computed({
         if (props.updateQuantity) {
             props.updateQuantity({ quantity: difference, id: props.item.id })
         }
+        if (newValue <= 0) {
+            if (props.deleteItem) {
+                props.deleteItem(props.item.id)
+            }
+            console.log(newValue, 'cart counter diff');
+
+        }
+
     }
 })
 

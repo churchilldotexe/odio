@@ -40,7 +40,7 @@ const updateCartItem = ({ id, quantity }: { id: number, quantity: number }) => {
                 </div>
 
                 <OrderedOverview v-for="item in cartStore.cart" :key="item.id" :item="item"
-                    :update-quantity="updateCartItem" />
+                    :update-quantity="updateCartItem" :delete-item="cartStore.deleteCartItem" />
                 <SummaryRow label="TOTAL" :value="cartStore.initialTotal" />
                 <ButtonLink href="/checkout" class="w-full text-center text-sm">Checkout</ButtonLink>
 
