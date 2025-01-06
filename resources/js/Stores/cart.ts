@@ -62,7 +62,7 @@ export const useCartStore = defineStore('cart', () => {
     });
 
     const addToCart = (item: Cart) => {
-        const oldCart = cloneCart(cart);
+        cloneCart(cart);
 
         const existingItemIndex = cart.findIndex(
             (cartItem) => cartItem.id === item.id
@@ -76,12 +76,6 @@ export const useCartStore = defineStore('cart', () => {
         } else {
             cart.push({ ...item });
         }
-
-        const undoCart = () => {
-            cart.splice(0, 1, ...oldCart);
-        };
-
-        return { oldCart, undoCart };
     };
 
     const updateCartItem = (itemId: number, quantity: number) => {
@@ -102,7 +96,11 @@ export const useCartStore = defineStore('cart', () => {
             return newQuantity;
         }
 
-        return quantity;
+        return { oldQuantity: quantity };
+    };
+
+    const undoCart = () => {
+        cart.splice(0, 1, ...prevCart);
     };
 
     const deleteCartItem = (id: number) => {
@@ -137,8 +135,10 @@ export const useCartStore = defineStore('cart', () => {
 
     return {
         cart,
+        prevCart,
         addToCart,
         updateCartItem,
+        undoCart,
         deleteCartItem,
         initialTotal,
         finalTotal,

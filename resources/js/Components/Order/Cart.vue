@@ -39,6 +39,7 @@ const updateCartItem = ({ id, quantity }: { id: number, quantity: number }) => {
                     <button @click="cartStore.clearCart" class="font-medium text-black/50 underline">Remove all</button>
                 </div>
 
+                <!-- TODO: try to do an undo feature when the item is removed. have a timed button that will show the undo button for a little while (try doing a popup for this ) a popup component that you can call where you can pass the oldCart data to have an option to undo the data  -->
                 <OrderedOverview v-for="item in cartStore.cart" :key="item.id" :item="item"
                     :update-quantity="updateCartItem" :delete-item="cartStore.deleteCartItem" />
                 <SummaryRow label="TOTAL" :value="cartStore.initialTotal" />

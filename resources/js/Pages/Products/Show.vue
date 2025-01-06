@@ -9,7 +9,6 @@ import ProductShow from '@/Components/Products/ProductShow.vue';
 import MainLayout from '@/Layouts/MainLayout.vue';
 import { BaseProduct, GalleryImages, ProductImages, ProductInclusion } from '@/Lib/Types/products';
 import { useCartStore } from '@/Stores/cart';
-import { router, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 
@@ -41,6 +40,8 @@ const addToCart = () => {
     cartStore.addToCart(cartItems)
     orderCount.value = 1
 }
+
+
 </script>
 
 <template>
@@ -49,7 +50,6 @@ const addToCart = () => {
 
         <div class="mx-auto grid max-w-screen-xl gap-30 pb-30 pt-6 lg:gap-40 lg:pb-40 lg:pt-14 ">
             <section class="grid gap-[5.5rem] px-6 xl:px-0">
-                <!-- TODO:  extract this make it dynamic (compound component) -->
 
                 <ProductShow :is-new="product.new" :title="product.name" :img-sources="product.product_images['main']"
                     :summary="product.description"
