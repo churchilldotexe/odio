@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Redirect;
 
 class CartController extends Controller
 {
@@ -11,7 +12,11 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+
+        $request->session()->put('cart', $request->cart);
+        // $request->session()->forget('cart');
+
+        return Redirect::back();
     }
 
     /**
@@ -19,6 +24,9 @@ class CartController extends Controller
      */
     public function destroy(Request $request)
     {
-        dd($request);
+
+        $request->session()->forget('cart');
+
+        return Redirect::back();
     }
 }
