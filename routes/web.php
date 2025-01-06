@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -32,6 +33,9 @@ Route::controller(CheckoutController::class)->group(function () {
     Route::get('/checkout', 'create');
     Route::post('/checkout', 'store');
 });
+
+Route::post('/cart', [CartController::class, 'store']);
+Route::delete('/cart', [CartController::class, 'destroy']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
