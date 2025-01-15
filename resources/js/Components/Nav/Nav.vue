@@ -41,7 +41,7 @@ const links = [
 
             <li class="transition-colors duration-300 hocus-visible:text-coral"
                 :class="[currentPath === link.path && 'text-coral']" v-for="link in links" :key="link.path">
-                <Link :href="link.path" class="">
+                <Link :href="link.path" prefetch :cache-for="['1m', '3m']">
                 {{ link.name }}
                 </Link>
             </li>

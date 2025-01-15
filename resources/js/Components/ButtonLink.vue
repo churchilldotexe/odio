@@ -11,7 +11,8 @@ defineProps<{
 
 <template>
     <Link :href="href"
-        :class="twMerge(` w-fit bg-coral px-8 py-4 text-xs font-bold uppercase text-white transition-colors duration-300 hocus-visible:bg-coral-light lg:ml-0 ${$attrs.class} `)">
+        :class="twMerge(` w-fit bg-coral px-8 py-4 text-xs font-bold uppercase text-white transition-colors duration-300 hocus-visible:bg-coral-light lg:ml-0 ${$attrs.class} `)"
+        prefetch :cache-for="['1m', '3m']">
     <slot>see product</slot>
     </Link>
 </template>

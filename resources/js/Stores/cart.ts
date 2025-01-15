@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { computed, onMounted, reactive, watch } from 'vue';
 import { router, usePage } from '@inertiajs/vue3';
 
+
 export interface Cart {
     id: number;
     name: string;
@@ -19,6 +20,7 @@ let sessionSyncTimeout: ReturnType<typeof setTimeout> | null = null;
 export const useCartStore = defineStore('cart', () => {
     const cart = reactive<Cart[]>([]);
     const prevCart = reactive<Cart[]>([]);
+
 
     const cloneCart = (cartValue: Cart[]) => {
         return prevCart.splice(0, 1, ...cartValue);
