@@ -34,11 +34,11 @@ jobs:
         with:
           bun-version: 1.1.43
 
-      - name: Install NPM dependencies
-        run: npm ci
+      - name: Install bun dependencies
+        run: bun install --frozen-lockfile
 
-      - name: Build NPM assets
-        run: npm run build
+      - name: Build bun assets
+        run: bun run build
 
       - name: Synchronize assets to server
         uses: easingthemes/ssh-deploy@v2.1.5
