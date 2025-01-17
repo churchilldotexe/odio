@@ -58,5 +58,4 @@ jobs:
           script: |
             cd ${{ secrets.TARGET }}
             php artisan migrate --seed --force
-            php artisan storage:link
             php artisan optimize
