@@ -18,7 +18,7 @@ import MainLayout from '@/Layouts/MainLayout.vue';
                 <div
                     class="mx-auto flex w-full max-w-sm flex-col items-center justify-center gap-4 md:max-w-md md:gap-6 lg:max-w-screen-xl lg:items-start lg:px-6 xl:px-0">
                     <p class="text-sm tracking-[0.625em] text-white/50">
-                        OLD PRODUCT
+                        NEW PRODUCT
                     </p>
                     <h1 class="text-4xl text-white md:text-[3.5rem] md:leading-none lg:w-1/2 lg:text-left">
                         XX99 MARK II HEADPHONES
