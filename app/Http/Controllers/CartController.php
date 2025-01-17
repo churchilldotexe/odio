@@ -15,7 +15,8 @@ class CartController extends Controller
 
         $request->session()->put('cart', $request->cart);
 
-        return Redirect::back();
+        // return Redirect::back();
+        return response()->noContent();
     }
 
     /**
@@ -26,6 +27,6 @@ class CartController extends Controller
 
         $request->session()->forget('cart');
 
-        return Redirect::back();
+        return response()->noContent();
     }
 }
